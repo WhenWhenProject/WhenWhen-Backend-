@@ -1,4 +1,4 @@
-package backend.domain;
+package backend.domain.enumeration;
 
 public enum Availability {
 

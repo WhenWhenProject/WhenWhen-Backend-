@@ -1,5 +1,6 @@
 package backend.domain;
 
+import backend.domain.enumeration.Role;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
