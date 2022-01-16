@@ -6,10 +6,8 @@ import backend.repository.MyQuerydslRepositorySupport;
 
 public class PlanRepositoryImpl extends MyQuerydslRepositorySupport implements PlanRepositoryCustom {
 
-
     public PlanRepositoryImpl() {
         super(Plan.class);
     }
-
 
 }
