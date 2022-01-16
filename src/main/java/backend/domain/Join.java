@@ -1,6 +1,7 @@
 package backend.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ public class Join {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+    @Builder
     public Join(User user, Plan plan) {
         this.user = user;
         this.plan = plan;

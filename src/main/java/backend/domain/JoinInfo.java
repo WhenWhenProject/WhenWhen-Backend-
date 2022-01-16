@@ -2,6 +2,7 @@ package backend.domain;
 
 import backend.domain.enumeration.Availability;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,7 @@ public class JoinInfo {
     @Enumerated(EnumType.STRING)
     private Availability availability;
 
+    @Builder
     public JoinInfo(Join join, LocalDate localDate, Availability availability) {
         this.join = join;
         this.localDate = localDate;

@@ -1,6 +1,7 @@
 package backend.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,7 @@ public class Plan {
 
     private LocalDateTime createLocalDateTime;
 
+    @Builder
     public Plan(User host, String title, LocalDate startDate, LocalDate endDate, Long expectedMemberCnt) {
         this.host = host;
         this.title = title;

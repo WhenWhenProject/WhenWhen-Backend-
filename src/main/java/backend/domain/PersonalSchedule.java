@@ -1,6 +1,7 @@
 package backend.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +25,7 @@ public class PersonalSchedule {
 
     private String title;
 
+    @Builder
     public PersonalSchedule(User user, LocalDate date, String title) {
         this.user = user;
         this.date = date;

@@ -2,6 +2,7 @@ package backend.domain;
 
 import backend.domain.enumeration.Role;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Builder
     public User(Role role) {
         this.role = role;
     }
