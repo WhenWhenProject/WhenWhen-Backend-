@@ -1,10 +1,7 @@
 package backend.domain;
 
 import backend.domain.enumeration.Availability;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +10,8 @@ import java.time.LocalDate;
 @Table(name = "_join_info")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class JoinInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +25,5 @@ public class JoinInfo {
 
     @Enumerated(EnumType.STRING)
     private Availability availability;
-
-    @Builder
-    public JoinInfo(Join join, LocalDate localDate, Availability availability) {
-        this.join = join;
-        this.localDate = localDate;
-        this.availability = availability;
-    }
 
 }

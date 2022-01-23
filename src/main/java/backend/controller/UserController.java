@@ -1,23 +1,31 @@
 package backend.controller;
 
-import backend.advice.logtrace.LogTracer;
-import backend.advice.logtrace.LogTracerAspect;
+import backend.api.personal_schedule.PersonalScheduleListResponse;
+import backend.api.common.ApiResponse;
+import backend.dto.PersonalScheduleDto;
+import backend.service.PersonalScheduleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:3000")
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
-    private final LogTracer logTracer;
-    private final LogTracerAspect logTracerAspect;
+    private final PersonalScheduleService personalScheduleService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "ok";
+    @GetMapping("/user/{id}/personal_schedules/{year}/{month}")
+    public ApiResponse<PersonalScheduleListResponse> getPersonalSchedules(@PathVariable("id") Long userId,
+                                                                          @PathVariable("year") Long year,
+                                                                          @PathVariable("month") Long month) {
+        List<PersonalScheduleDto> personalScheduleDtoList = personalScheduleService.findPersonalScheduleList(userId, year, month);
+
+        PersonalScheduleListResponse personalScheduleListResponse = PersonalScheduleListResponse.of(userId, personalScheduleDtoList);
+
+        return new ApiResponse<>(ApiResponse.SUCCESS, personalScheduleListResponse);
     }
 
 }

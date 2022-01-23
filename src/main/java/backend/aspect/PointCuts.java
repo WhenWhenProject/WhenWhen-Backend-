@@ -1,4 +1,4 @@
-package backend.advice;
+package backend.aspect;
 
 import org.aspectj.lang.annotation.Pointcut;
 

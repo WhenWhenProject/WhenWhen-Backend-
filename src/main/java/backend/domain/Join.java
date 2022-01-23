@@ -1,9 +1,6 @@
 package backend.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,8 @@ import javax.persistence.*;
 @Table(name = "_join")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Join {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +22,5 @@ public class Join {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
-
-    @Builder
-    public Join(User user, Plan plan) {
-        this.user = user;
-        this.plan = plan;
-    }
 
 }

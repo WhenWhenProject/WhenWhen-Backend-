@@ -1,5 +1,7 @@
-package backend.advice.logtrace;
+package backend.aspect.logtrace;
 
+import backend.aspect.logtrace.logtracer.LogTracer;
+import backend.aspect.logtrace.logtracer.TraceStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,7 +15,7 @@ public class LogTracerAspect {
 
     private final LogTracer logTracer;
 
-    @Around("backend.advice.PointCuts.all()")
+    @Around("backend.aspect.PointCuts.all()")
     public Object execute(ProceedingJoinPoint joinPoint) throws  Throwable {
         TraceStatus status = null;
 

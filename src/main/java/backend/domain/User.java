@@ -1,10 +1,7 @@
 package backend.domain;
 
 import backend.domain.enumeration.Role;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "_user")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +18,5 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @Builder
-    public User(Role role) {
-        this.role = role;
-    }
 
 }

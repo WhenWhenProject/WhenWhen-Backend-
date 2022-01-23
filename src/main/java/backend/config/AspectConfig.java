@@ -1,12 +1,12 @@
 package backend.config;
 
-import backend.advice.logtrace.LogTracer;
-import backend.advice.logtrace.LogTracerAspect;
+import backend.aspect.logtrace.logtracer.LogTracer;
+import backend.aspect.logtrace.LogTracerAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AopConfig {
+public class AspectConfig {
 
     @Bean
     public LogTracer logTracer() {

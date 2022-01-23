@@ -1,9 +1,6 @@
 package backend.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +10,8 @@ import java.time.LocalDateTime;
 @Table(name = "_plan")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Plan {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +30,5 @@ public class Plan {
     private Long expectedMemberCnt;
 
     private LocalDateTime createLocalDateTime;
-
-    @Builder
-    public Plan(User host, String title, LocalDate startDate, LocalDate endDate, Long expectedMemberCnt) {
-        this.host = host;
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.expectedMemberCnt = expectedMemberCnt;
-        this.createLocalDateTime = LocalDateTime.now();
-    }
 
 }

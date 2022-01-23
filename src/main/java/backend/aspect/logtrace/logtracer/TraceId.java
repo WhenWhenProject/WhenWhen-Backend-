@@ -1,4 +1,4 @@
-package backend.advice.logtrace;
+package backend.aspect.logtrace.logtracer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
