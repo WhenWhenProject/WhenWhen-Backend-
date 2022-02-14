@@ -3,6 +3,7 @@ package backend.api.service;
 import backend.api.controller.dto.plan.CreatePlanRequest;
 import backend.api.entity.Plan;
 import backend.api.entity.User;
+import backend.api.exception.PlanNotFoundException;
 import backend.api.exception.UserNotFountException;
 import backend.api.repository.plan.PlanRepository;
 import backend.api.repository.user.UserRepository;
@@ -10,6 +11,8 @@ import backend.api.service.dto.PlanDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,6 +40,14 @@ public class PlanService {
         Plan savedPlan = planRepository.save(plan);
 
         return PlanDto.of(savedPlan);
+    }
+
+    public PlanDto findByLinkUrl(String linkUrl) {
+        Plan plan = planRepository.findByLinkUrl(linkUrl);
+
+        if(plan == null) throw new PlanNotFoundException();
+
+        return PlanDto.of(plan);
     }
 
 }

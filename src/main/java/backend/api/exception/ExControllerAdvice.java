@@ -12,4 +12,9 @@ public class ExControllerAdvice {
         return ApiResponse.fail(e.getMessage());
     }
 
+    @ExceptionHandler(PlanNotFoundException.class)
+    public ApiResponse<String> planNotFoundExHandler(PlanNotFoundException e) {
+        return ApiResponse.fail(e.getMessage());
+    }
+
 }

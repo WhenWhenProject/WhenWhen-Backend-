@@ -23,6 +23,8 @@ public class JoinInfo {
     @NotNull
     private LocalDate localDate;
 
+
+
     @NotNull
     @Enumerated(EnumType.STRING)
     private Availability availability;

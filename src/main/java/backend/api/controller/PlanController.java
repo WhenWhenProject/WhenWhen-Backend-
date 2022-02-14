@@ -3,8 +3,8 @@ package backend.api.controller;
 import backend.api.controller.dto.common.ApiResponse;
 import backend.api.controller.dto.personal_schedule.PersonalScheduleListResponse;
 import backend.api.controller.dto.plan.CreatePlanRequest;
-//import backend.api.service.PlanService;
 import backend.api.controller.dto.plan.CreatePlanResponse;
+import backend.api.controller.dto.plan.GetPlanInfoResponse;
 import backend.api.service.PlanService;
 import backend.api.service.dto.PersonalScheduleDto;
 import backend.api.service.dto.PlanDto;
@@ -23,10 +23,17 @@ public class PlanController {
     private final PlanService planService;
 
     @PostMapping
-    public ApiResponse<CreatePlanResponse> createPlan(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody CreatePlanRequest createPlanRequest) {
+    public ApiResponse<CreatePlanResponse> create(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody CreatePlanRequest createPlanRequest) {
         PlanDto planDto = planService.create(principalDetails.getUsername(), createPlanRequest);
 
         return ApiResponse.success("plan", CreatePlanResponse.of(planDto));
+    }
+
+    @GetMapping("/submit/{linkUrl}")
+    public ApiResponse<GetPlanInfoResponse> find(@PathVariable String linkUrl) {
+        PlanDto planDto = planService.findByLinkUrl(linkUrl);
+
+        return ApiResponse.success("plan", GetPlanInfoResponse.of(planDto));
     }
 
 }

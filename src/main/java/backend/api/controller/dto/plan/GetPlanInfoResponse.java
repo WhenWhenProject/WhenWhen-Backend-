@@ -1,21 +1,15 @@
 package backend.api.controller.dto.plan;
 
-import backend.api.controller.dto.personal_schedule.PersonalScheduleWithoutUserIdResponse;
 import backend.api.entity.User;
-import backend.api.service.dto.PersonalScheduleDto;
 import backend.api.service.dto.PlanDto;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Getter
-public class CreatePlanResponse {
+public class GetPlanInfoResponse {
 
-    private User host;
     private String title;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -26,8 +20,7 @@ public class CreatePlanResponse {
     private Long startHour;
 
     @Builder
-    private CreatePlanResponse(User host, String title, LocalDate startDate, LocalDate endDate, Long expectedMemberCnt, boolean fixed, String linkUrl, String location, Long startHour) {
-        this.host = host;
+    private GetPlanInfoResponse(String title, LocalDate startDate, LocalDate endDate, Long expectedMemberCnt, boolean fixed, String linkUrl, String location, Long startHour) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -38,9 +31,8 @@ public class CreatePlanResponse {
         this.startHour = startHour;
     }
 
-    public static CreatePlanResponse of(PlanDto planDto) {
-        return CreatePlanResponse.builder()
-                .host(planDto.getHost())
+    public static GetPlanInfoResponse of(PlanDto planDto) {
+        return GetPlanInfoResponse.builder()
                 .title(planDto.getTitle())
                 .startDate(planDto.getStartDate())
                 .endDate(planDto.getEndDate())
