@@ -14,18 +14,16 @@ public class Join {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
     @Builder
-    public Join(
+    private Join(
             @NotNull User user,
             @NotNull Plan plan) {
         this.user = user;

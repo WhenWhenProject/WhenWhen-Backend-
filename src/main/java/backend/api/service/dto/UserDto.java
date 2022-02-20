@@ -3,7 +3,8 @@ package backend.api.service.dto;
 import backend.api.entity.User;
 import backend.oauth.entity.ProviderType;
 import backend.oauth.entity.RoleType;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 public class UserDto {
@@ -36,6 +37,17 @@ public class UserDto {
                 .profileImageUrl(user.getProfileImageUrl())
                 .providerType(user.getProviderType())
                 .roleType(user.getRoleType())
+                .build();
+    }
+
+    public User toEntity() {
+        return User.builder()
+                .username(username)
+                .nickName(nickName)
+                .email(email)
+                .profileImageUrl(profileImageUrl)
+                .providerType(providerType)
+                .roleType(roleType)
                 .build();
     }
 

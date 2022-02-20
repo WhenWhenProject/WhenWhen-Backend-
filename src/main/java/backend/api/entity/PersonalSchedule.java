@@ -15,24 +15,29 @@ public class PersonalSchedule {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
     private LocalDate localDate;
 
-    @NotNull
+    private Integer startHour;
+
+    private Integer endHour;
+
     private String title;
 
     @Builder
-    public PersonalSchedule(
+    private PersonalSchedule(
             @NotNull User user,
             @NotNull LocalDate localDate,
+            @NotNull Integer startHour,
+            @NotNull Integer endHour,
             @NotNull String title) {
         this.user = user;
         this.localDate = localDate;
+        this.startHour = startHour;
+        this.endHour = endHour;
         this.title = title;
     }
 

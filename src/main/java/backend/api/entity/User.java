@@ -4,7 +4,6 @@ import backend.api.entity.common.BaseTimeEntity;
 import backend.oauth.entity.ProviderType;
 import backend.oauth.entity.RoleType;
 import lombok.*;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,45 +18,44 @@ public class User extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull @Size(max = 64)
     @Column(length = 64, unique = true)
     private String username;
 
-    @NotNull @Size(max = 100)
+    @Column(length = 128)
+    private String password;
+
     @Column(length = 100)
     private String nickName;
 
-    @NotNull @Size(max = 512)
-    @Column(length = 512, unique = true)
+    @Column(length = 512)
     private String email;
 
-    @NotNull @Size(max = 512)
     @Column(length = 512)
     private String profileImageUrl;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ProviderType providerType;
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    @NotNull
     private RoleType roleType;
 
     @Builder
-    public User(
+    private User(
             @NotNull @Size(max = 64) String username,
+            @Size(max = 128) String password,
             @NotNull @Size(max = 100) String nickName,
-            @NotNull @Size(max = 512) String email,
-            @NotNull @Size(max = 512) String profileImageUrl,
-            @NotNull ProviderType providerType,
+            @Size(max = 512) String email,
+            @Size(max = 512) String profileImageUrl,
+            ProviderType providerType,
             @NotNull RoleType roleType
     ) {
         this.username = username;
-        this.nickName = StringUtils.hasText(nickName) ? nickName : "닉네임";
-        this.email = StringUtils.hasText(email) ? email : "no_email";
-        this.profileImageUrl = StringUtils.hasText(profileImageUrl) ? profileImageUrl : "";
+        this.password = password != null ? password : "NO_PASS";
+        this.nickName = nickName;
+        this.email = email != null ? email : "NO_EMAIL";
+        this.profileImageUrl = profileImageUrl != null ? profileImageUrl : "";
         this.providerType = providerType;
         this.roleType = roleType;
     }
@@ -68,6 +66,10 @@ public class User extends BaseTimeEntity {
 
     public void changeProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public void changeEmail(String email) {
+        this.email = email;
     }
 
 }

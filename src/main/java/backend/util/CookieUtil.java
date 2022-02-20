@@ -11,6 +11,7 @@ import java.util.Optional;
 public class CookieUtil {
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
+        System.out.println("CookieUtil.getCookie()");
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null && cookies.length > 0) {
@@ -24,6 +25,7 @@ public class CookieUtil {
     }
 
     public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
+        System.out.println("CookieUtil.addCookie()");
         Cookie cookie = new Cookie(name, value);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
@@ -33,6 +35,7 @@ public class CookieUtil {
     }
 
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {
+        System.out.println("CookieUtil.deleteCookie()");
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null && cookies.length > 0) {
@@ -48,11 +51,13 @@ public class CookieUtil {
     }
 
     public static String serialize(Object obj) {
+        System.out.println("CookieUtil.serialize()");
         return Base64.getUrlEncoder()
                 .encodeToString(SerializationUtils.serialize(obj));
     }
 
     public static <T> T deserialize(Cookie cookie, Class<T> cls) {
+        System.out.println("CookieUtil.deserialize()");
         return cls.cast(
                 SerializationUtils.deserialize(
                         Base64.getUrlDecoder().decode(cookie.getValue())

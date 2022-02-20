@@ -15,27 +15,30 @@ public class JoinInfo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "join_id")
     private Join join;
 
-    @NotNull
     private LocalDate localDate;
 
+    private Integer startHour;
 
+    private Integer endHour;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Availability availability;
 
     @Builder
-    public JoinInfo(
+    private JoinInfo(
             @NotNull Join join,
             @NotNull LocalDate localDate,
+            @NotNull Integer startHour,
+            @NotNull Integer endHour,
             @NotNull Availability availability) {
         this.join = join;
         this.localDate = localDate;
+        this.startHour = startHour;
+        this.endHour = endHour;
         this.availability = availability;
     }
 

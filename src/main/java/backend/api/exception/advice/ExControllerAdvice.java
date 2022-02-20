@@ -1,6 +1,8 @@
-package backend.api.exception;
+package backend.api.exception.advice;
 
 import backend.api.controller.dto.common.ApiResponse;
+import backend.api.exception.PlanNotFoundException;
+import backend.api.exception.UserNotFountException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

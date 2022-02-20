@@ -1,6 +1,5 @@
 package backend.api.repository.user_refresh_token;
 
-import backend.api.entity.QUser;
 import backend.api.entity.User;
 import backend.api.entity.UserRefreshToken;
 import backend.api.repository.util.MyQuerydslRepositorySupport;
@@ -19,7 +18,7 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
         return getQueryFactory()
                 .select(userRefreshToken)
                 .from(userRefreshToken)
-                .where(userRefreshToken.user.eq(user))
+                .where(userRefreshToken.username.eq(user.getUsername()))
                 .fetchOne();
     }
 
@@ -28,7 +27,6 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
         return getQueryFactory()
                 .select(userRefreshToken)
                 .from(userRefreshToken)
-                .join(userRefreshToken.user, user).fetchJoin()
                 .where(user.username.eq(username))
                 .fetchOne();
     }
@@ -40,7 +38,7 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
                 .from(userRefreshToken)
                 .where(
                         userRefreshToken.refreshToken.eq(refreshToken)
-                                        .and(userRefreshToken.user.eq(user))
+                                        .and(userRefreshToken.username.eq(user.getUsername()))
                 )
                 .fetchOne();
     }

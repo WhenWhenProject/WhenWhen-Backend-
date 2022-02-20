@@ -18,20 +18,18 @@ public class UserRefreshToken {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(length = 64, unique = true)
+    private String username;
 
-    @NotNull @Size(max = 256)
     @Column(length = 256)
     private String refreshToken;
 
     @Builder
-    public UserRefreshToken(
-            User user,
+    private UserRefreshToken(
+            @NotNull @Size(max = 64) String username,
             @NotNull @Size(max = 256) String refreshToken
     ) {
-        this.user = user;
+        this.username = username;
         this.refreshToken = refreshToken;
     }
 

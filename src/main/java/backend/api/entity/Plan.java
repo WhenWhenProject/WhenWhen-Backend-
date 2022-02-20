@@ -1,12 +1,13 @@
 package backend.api.entity;
 
 import backend.api.entity.common.BaseTimeEntity;
-import lombok.*;
-import org.springframework.util.StringUtils;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Table(name = "_plan")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Plan  extends BaseTimeEntity {
+public class Plan extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,40 +24,33 @@ public class Plan  extends BaseTimeEntity {
     @JoinColumn(name = "host_id")
     private User host;
 
-    @NotNull @Size(max = 100)
     @Column(length = 100)
     private String title;
 
-    @NotNull
     private LocalDate startDate;
 
-    @NotNull
     private LocalDate endDate;
 
-    @NotNull
     private Long expectedMemberCnt;
 
     private boolean fixed;
 
-    @NotNull
     private String linkUrl;
 
-    @Size(max = 100)
     @Column(length = 100)
     private String location;
 
-    @NotNull
-    private Long startHour;
+    private Integer startHour;
 
     @Builder
-    public Plan(
+    private Plan(
             @NotNull User host,
             @NotNull String title,
             @NotNull LocalDate startDate,
             @NotNull LocalDate endDate,
             @NotNull Long expectedMemberCnt,
-            @NotNull String location,
-            @NotNull Long startHour
+            String location,
+            @NotNull Integer startHour
     ) {
         this.host = host;
         this.title = title;
@@ -64,8 +58,8 @@ public class Plan  extends BaseTimeEntity {
         this.endDate = endDate;
         this.expectedMemberCnt = expectedMemberCnt;
         this.fixed = false;
-        this.linkUrl =  UUID.randomUUID().toString().substring(0, 30);
-        this.location = StringUtils.hasText(location) ? location : "미정";
+        this.linkUrl = UUID.randomUUID().toString().substring(0, 50);
+        this.location = location != null ? location : "미정";
         this.startHour = startHour;
     }
 
