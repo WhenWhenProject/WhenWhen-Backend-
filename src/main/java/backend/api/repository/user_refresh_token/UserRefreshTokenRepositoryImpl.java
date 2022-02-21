@@ -1,8 +1,11 @@
 package backend.api.repository.user_refresh_token;
 
+import backend.api.entity.QUserRefreshToken;
 import backend.api.entity.User;
 import backend.api.entity.UserRefreshToken;
 import backend.api.repository.util.MyQuerydslRepositorySupport;
+
+import java.util.Optional;
 
 import static backend.api.entity.QUser.user;
 import static backend.api.entity.QUserRefreshToken.userRefreshToken;
@@ -23,12 +26,14 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
     }
 
     @Override
-    public UserRefreshToken findByUsername(String username) {
-        return getQueryFactory()
-                .select(userRefreshToken)
-                .from(userRefreshToken)
+    public Optional<UserRefreshToken> findByUsername(String username) {
+        UserRefreshToken userRefreshToken = getQueryFactory()
+                .select(QUserRefreshToken.userRefreshToken)
+                .from(QUserRefreshToken.userRefreshToken)
                 .where(user.username.eq(username))
                 .fetchOne();
+
+        return Optional.ofNullable(userRefreshToken);
     }
 
     @Override
