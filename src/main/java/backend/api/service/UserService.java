@@ -1,5 +1,6 @@
 package backend.api.service;
 
+import backend.api.controller.dto.request.ChangeUserRequest;
 import backend.api.entity.User;
 import backend.api.entity.UserRefreshToken;
 import backend.api.repository.user.UserRepository;
@@ -132,6 +133,20 @@ public class UserService {
         else {
             return null;
         }
+    }
+
+    public UserDto findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+
+        return UserDto.of(user);
+    }
+
+    @Transactional
+    public UserDto changeUserInfo(String username, ChangeUserRequest changeUserRequest) {
+        User user = userRepository.findByUsername(username);
+        changeUserRequest.apply(user);
+
+        return UserDto.of(user);
     }
 
 }
