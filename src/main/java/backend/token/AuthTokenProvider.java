@@ -1,5 +1,6 @@
 package backend.token;
 
+import backend.oauth.entity.UserPrincipal;
 import backend.oauth.exception.TokenValidFailedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
@@ -48,9 +49,14 @@ public class AuthTokenProvider {
                     .collect(Collectors.toList());
 
             System.out.printf("AuthTokenProvider.getAuthentication() : claims subject := [%s]", claims.getSubject());
-            User principal = new User(claims.getSubject(), "", authorities);
 
-            return new UsernamePasswordAuthenticationToken(principal, authToken, authorities);
+            UserPrincipal userPrincipal = UserPrincipal.builder()
+                    .username(claims.getSubject())
+                    .password("")
+                    .authorities(authorities)
+                    .build();
+
+            return new UsernamePasswordAuthenticationToken(userPrincipal, authToken, authorities);
         } else {
             throw new TokenValidFailedException();
         }

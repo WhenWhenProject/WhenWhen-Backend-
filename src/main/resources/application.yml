@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
     properties:
       hibernate:
@@ -70,7 +70,7 @@ app:
 
   oauth2:
     authorizedRedirectUris:
-      - http://localhost:4000/oauth/redirect
+      - http://localhost:3000/oauth/redirect
 
 logging:
   level:

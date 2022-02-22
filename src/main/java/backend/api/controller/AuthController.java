@@ -46,8 +46,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ApiResponse<String> login(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginRequest loginRequest) {
-        AuthToken accessToken = userService.login(request, response, loginRequest.getUsername(), passwordEncoder.encode(loginRequest.getPassword()));
-
+        AuthToken accessToken = userService.login(request, response, loginRequest.getUsername(), loginRequest.getPassword());
         return ApiResponse.success("accessToken", accessToken.getToken());
     }
 

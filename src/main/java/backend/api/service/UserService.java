@@ -58,8 +58,10 @@ public class UserService {
         // username, password 에 해당하는 인증 객체를 가져옴. 내부에서 userDetailsService 호출
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
+
         // 시큐리티 컨텍스트에 저장
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
 
         // 엑세스 토큰 생성
         Date now = new Date();

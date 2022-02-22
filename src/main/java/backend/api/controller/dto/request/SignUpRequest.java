@@ -11,10 +11,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class SignUpRequest {
 
-    @NotNull @Size(min = 5, max = 64)
+    @NotNull @Size(min = 4, max = 64)
     private String username;
 
-    @NotNull @Size(min = 5, max = 50)
+    @NotNull @Size(min = 4, max = 50)
     private String password;
 
     @NotNull @Size(min = 1, max = 50)

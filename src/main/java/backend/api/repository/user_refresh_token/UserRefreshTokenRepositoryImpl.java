@@ -7,7 +7,6 @@ import backend.api.repository.util.MyQuerydslRepositorySupport;
 
 import java.util.Optional;
 
-import static backend.api.entity.QUser.user;
 import static backend.api.entity.QUserRefreshToken.userRefreshToken;
 
 public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport implements UserRefreshTokenRepositoryCustom {
@@ -27,13 +26,13 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
 
     @Override
     public Optional<UserRefreshToken> findByUsername(String username) {
-        UserRefreshToken userRefreshToken = getQueryFactory()
-                .select(QUserRefreshToken.userRefreshToken)
-                .from(QUserRefreshToken.userRefreshToken)
-                .where(user.username.eq(username))
+        UserRefreshToken result = getQueryFactory()
+                .select(userRefreshToken)
+                .from(userRefreshToken)
+                .where(userRefreshToken.username.eq(username))
                 .fetchOne();
 
-        return Optional.ofNullable(userRefreshToken);
+        return Optional.ofNullable(result);
     }
 
     @Override

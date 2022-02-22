@@ -24,11 +24,11 @@ public class UserPrincipal implements UserDetails, OAuth2User, OidcUser {
     private final RoleType roleType;
 
     // 부가적인 정보들
-    private final Collection<GrantedAuthority> authorities; // roleType 을 Authority 타입으로 바꾼 것. ( 우리 서버에서는 role 이 계정 당 1 개이므로 컬렉션의 사이즈는 1 )
+    private final Collection<? extends GrantedAuthority> authorities; // roleType 을 Authority 타입으로 바꾼 것. ( 우리 서버에서는 role 이 계정 당 1 개이므로 컬렉션의 사이즈는 1 )
     private final Map<String, Object> attributes; // OAuth2User 에서 필요. 여기에는 OAuth 서버에서 받은 속성들이 들어있다.
 
     @Builder
-    private UserPrincipal(String username, String password, ProviderType providerType, RoleType roleType, Collection<GrantedAuthority> authorities, Map<String, Object> attributes) {
+    private UserPrincipal(String username, String password, ProviderType providerType, RoleType roleType, Collection<? extends GrantedAuthority> authorities, Map<String, Object> attributes) {
         this.username = username;
         this.password = password;
         this.providerType = providerType;
@@ -38,7 +38,7 @@ public class UserPrincipal implements UserDetails, OAuth2User, OidcUser {
     }
 
     @Builder
-    private UserPrincipal(String username, String password, ProviderType providerType, RoleType roleType, Collection<GrantedAuthority> authorities) {
+    private UserPrincipal(String username, String password, ProviderType providerType, RoleType roleType, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.providerType = providerType;
