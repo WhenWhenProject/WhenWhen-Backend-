@@ -35,6 +35,7 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     private final static String REFRESH_TOKEN = "refresh_token";
+    private final static long THREE_DAYS_MSEC = 259200000;
 
     @Transactional
     public UserDto signUp(String username, String password, String nickName, String email) {
@@ -90,6 +91,47 @@ public class UserService {
 
         // 엑세스 토큰 반환(response body 에 담아서 보내기)
         return accessToken;
+    }
+
+    @Transactional
+    public AuthToken updateRefreshToken(HttpServletRequest request, HttpServletResponse response, String username, RoleType roleType, AuthToken refreshToken) {
+        // username & refresh token 으로 DB 확인
+        if (userRefreshTokenRepository.findByUsernameAndRefreshToken(username, refreshToken.getToken()).isPresent()) {
+            // 일단 엑세스 토큰 생성
+            Date now = new Date();
+            AuthToken newAccessToken = tokenProvider.createAuthToken(
+                    username,
+                    roleType.getCode(),
+                    new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
+            );
+
+            UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUsernameAndRefreshToken(username, refreshToken.getToken()).get();
+
+            long validTime = refreshToken.getTokenClaims().getExpiration().getTime() - now.getTime();
+
+            // refresh 토큰 기간이 3일 이하로 남은 경우, refresh 토큰 갱신
+            if (validTime <= THREE_DAYS_MSEC) {
+                // refresh 토큰 설정
+                long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
+
+                AuthToken newRefreshToken = tokenProvider.createAuthToken(
+                        appProperties.getAuth().getTokenSecret(),
+                        new Date(now.getTime() + refreshTokenExpiry)
+                );
+
+                // DB에 refresh 토큰 업데이트
+                userRefreshToken.changeRefreshToken(newRefreshToken.getToken());
+
+                int cookieMaxAge = (int) refreshTokenExpiry / 60;
+                CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
+                CookieUtil.addCookie(response, REFRESH_TOKEN, newRefreshToken.getToken(), cookieMaxAge);
+            }
+
+            return newAccessToken;
+        }
+        else {
+            return null;
+        }
     }
 
 }
