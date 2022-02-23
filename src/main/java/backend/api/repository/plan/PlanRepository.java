@@ -3,8 +3,11 @@ package backend.api.repository.plan;
 import backend.api.entity.Plan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PlanRepository extends JpaRepository<Plan, Long>, PlanRepositoryCustom {
+import java.util.Optional;
 
-    Plan findByLinkUrl(String linkUrl);
+public interface PlanRepository extends JpaRepository<Plan, Long> {
+
+    Optional<Plan> findByLinkUrl(String linkUrl);
+    Optional<Plan> findByTitle(String title);
 
 }

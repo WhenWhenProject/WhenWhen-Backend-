@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "_join")
@@ -22,12 +24,20 @@ public class Join {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "join_id")
+    private List<JoinInfo> joinInfoList = new ArrayList<>();
+
     @Builder
     private Join(
             @NotNull User user,
             @NotNull Plan plan) {
         this.user = user;
         this.plan = plan;
+    }
+
+    public void addJoinInfo(JoinInfo joinInfo) {
+        joinInfoList.add(joinInfo);
     }
 
 }

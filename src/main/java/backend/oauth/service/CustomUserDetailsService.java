@@ -1,6 +1,7 @@
 package backend.oauth.service;
 
 import backend.api.entity.User;
+import backend.api.exception.UserNotFoundException;
 import backend.api.repository.user.UserRepository;
 import backend.oauth.entity.UserPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("CustomUserDetailsService.loadUserByUsername()");
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("Can not find username.");
-        }
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
 
         return UserPrincipal.create(user);
     }

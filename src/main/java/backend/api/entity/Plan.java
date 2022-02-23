@@ -35,6 +35,7 @@ public class Plan extends BaseTimeEntity {
 
     private boolean fixed;
 
+    @Column(length = 100)
     private String linkUrl;
 
     @Column(length = 100)
@@ -58,7 +59,7 @@ public class Plan extends BaseTimeEntity {
         this.endDate = endDate;
         this.expectedMemberCnt = expectedMemberCnt;
         this.fixed = false;
-        this.linkUrl = UUID.randomUUID().toString().substring(0, 50);
+        this.linkUrl = UUID.randomUUID().toString();
         this.location = location != null ? location : "미정";
         this.startHour = startHour;
     }

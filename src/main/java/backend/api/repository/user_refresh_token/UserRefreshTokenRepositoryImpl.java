@@ -1,6 +1,5 @@
 package backend.api.repository.user_refresh_token;
 
-import backend.api.entity.QUserRefreshToken;
 import backend.api.entity.User;
 import backend.api.entity.UserRefreshToken;
 import backend.api.repository.util.MyQuerydslRepositorySupport;
@@ -16,44 +15,28 @@ public class UserRefreshTokenRepositoryImpl extends MyQuerydslRepositorySupport 
     }
 
     @Override
-    public UserRefreshToken findByUser(User user) {
-        return getQueryFactory()
-                .select(userRefreshToken)
-                .from(userRefreshToken)
-                .where(userRefreshToken.username.eq(user.getUsername()))
-                .fetchOne();
-    }
-
-    @Override
-    public Optional<UserRefreshToken> findByUsername(String username) {
+    public Optional<UserRefreshToken> findByUser(User user) {
         UserRefreshToken result = getQueryFactory()
                 .select(userRefreshToken)
                 .from(userRefreshToken)
-                .where(userRefreshToken.username.eq(username))
+                .where(userRefreshToken.username.eq(user.getUsername()))
                 .fetchOne();
 
         return Optional.ofNullable(result);
     }
 
     @Override
-    public UserRefreshToken findByUserAndRefreshToken(User user, String refreshToken) {
-        return getQueryFactory()
+    public Optional<UserRefreshToken> findByUserAndRefreshToken(User user, String refreshToken) {
+        UserRefreshToken result = getQueryFactory()
                 .select(userRefreshToken)
                 .from(userRefreshToken)
                 .where(
-                        userRefreshToken.refreshToken.eq(refreshToken)
-                                        .and(userRefreshToken.username.eq(user.getUsername()))
+                        userRefreshToken.refreshToken.eq(refreshToken).and(
+                                userRefreshToken.username.eq(user.getUsername()))
                 )
                 .fetchOne();
-    }
 
-    @Override
-    public UserRefreshToken findByRefreshToken(String refreshToken) {
-        return getQueryFactory()
-                .select(userRefreshToken)
-                .from(userRefreshToken)
-                .where(userRefreshToken.refreshToken.eq(refreshToken))
-                .fetchOne();
+        return Optional.ofNullable(result);
     }
 
 }

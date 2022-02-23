@@ -3,6 +3,7 @@ package backend.api.service;
 import backend.api.controller.dto.request.ChangeUserRequest;
 import backend.api.entity.User;
 import backend.api.entity.UserRefreshToken;
+import backend.api.exception.UserNotFoundException;
 import backend.api.repository.user.UserRepository;
 import backend.api.repository.user_refresh_token.UserRefreshTokenRepository;
 import backend.api.service.dto.UserDto;
@@ -138,14 +139,16 @@ public class UserService {
     }
 
     public UserDto findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
 
         return UserDto.of(user);
     }
 
     @Transactional
     public UserDto changeUserInfo(String username, ChangeUserRequest changeUserRequest) {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(UserNotFoundException::new);
         changeUserRequest.apply(user);
 
         return UserDto.of(user);

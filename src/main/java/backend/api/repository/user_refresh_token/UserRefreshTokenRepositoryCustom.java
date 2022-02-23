@@ -7,9 +7,7 @@ import java.util.Optional;
 
 public interface UserRefreshTokenRepositoryCustom {
 
-    UserRefreshToken findByUser(User user);
-    Optional<UserRefreshToken> findByUsername(String username);
-    UserRefreshToken findByUserAndRefreshToken(User user, String refreshToken);
-    UserRefreshToken findByRefreshToken(String refreshToken);
+    Optional<UserRefreshToken> findByUser(User user);
+    Optional<UserRefreshToken> findByUserAndRefreshToken(User user, String refreshToken);
 
 }
