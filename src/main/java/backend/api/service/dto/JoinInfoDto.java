@@ -11,6 +11,8 @@ public class JoinInfoDto {
 
     private Long id;
 
+    private JoinDto joinDto;
+
     private LocalDate localDate;
 
     private Integer startHour;
@@ -18,8 +20,9 @@ public class JoinInfoDto {
     private Integer endHour;
 
     @Builder
-    private JoinInfoDto(Long id, LocalDate localDate, Integer startHour, Integer endHour) {
+    private JoinInfoDto(Long id, JoinDto joinDto, LocalDate localDate, Integer startHour, Integer endHour) {
         this.id = id;
+        this.joinDto = joinDto;
         this.localDate = localDate;
         this.startHour = startHour;
         this.endHour = endHour;
@@ -28,17 +31,10 @@ public class JoinInfoDto {
     public static JoinInfoDto of(JoinInfo joinInfo) {
         return JoinInfoDto.builder()
                 .id(joinInfo.getId())
+                .joinDto(JoinDto.of(joinInfo.getJoin()))
                 .localDate(joinInfo.getLocalDate())
                 .startHour(joinInfo.getStartHour())
                 .endHour(joinInfo.getEndHour())
-                .build();
-    }
-
-    public JoinInfo toEntity() {
-        return JoinInfo.builder()
-                .localDate(localDate)
-                .startHour(startHour)
-                .endHour(endHour)
                 .build();
     }
 

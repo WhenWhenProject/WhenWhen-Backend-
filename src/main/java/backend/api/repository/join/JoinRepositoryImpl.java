@@ -6,7 +6,6 @@ import backend.api.repository.util.MyQuerydslRepositorySupport;
 import java.util.Optional;
 
 import static backend.api.entity.QJoin.join;
-import static backend.api.entity.QJoinInfo.joinInfo;
 import static backend.api.entity.QUser.user;
 
 public class JoinRepositoryImpl extends MyQuerydslRepositorySupport implements JoinRepositoryCustom {
@@ -21,7 +20,7 @@ public class JoinRepositoryImpl extends MyQuerydslRepositorySupport implements J
                 .select(join)
                 .from(join)
                 .join(join.user, user).on(user.username.eq(username))
-                .join(join.joinInfoList, joinInfo).fetchJoin()
+                .join(join.joinInfoList).fetchJoin()
                 .where(join.plan.id.eq(planId))
                 .fetchOne();
 

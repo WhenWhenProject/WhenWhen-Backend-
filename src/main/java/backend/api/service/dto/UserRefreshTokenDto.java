@@ -26,11 +26,4 @@ public class UserRefreshTokenDto {
                 .build();
     }
 
-    public UserRefreshToken toEntity() {
-        return UserRefreshToken.builder()
-                .username(username)
-                .refreshToken(refreshToken)
-                .build();
-    }
-
 }

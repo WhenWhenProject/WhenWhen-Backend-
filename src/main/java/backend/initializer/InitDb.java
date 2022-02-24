@@ -108,24 +108,27 @@ public class InitDb {
                     .plan(plan1)
                     .build();
 
-            join1.getJoinInfoList().add(
+            join1.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join1)
                             .localDate(LocalDate.of(2021, 3, 5))
                             .startHour(17)
                             .endHour(21)
                             .build()
             );
 
-            join1.getJoinInfoList().add(
+            join1.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join1)
                             .localDate(LocalDate.of(2021, 3, 6))
                             .startHour(18)
                             .endHour(22)
                             .build()
             );
 
-            join1.getJoinInfoList().add(
+            join1.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join1)
                             .localDate(LocalDate.of(2021, 3, 7))
                             .startHour(19)
                             .endHour(23)
@@ -137,24 +140,27 @@ public class InitDb {
                     .plan(plan1)
                     .build();
 
-            join2.getJoinInfoList().add(
+            join2.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join2)
                             .localDate(LocalDate.of(2021, 3, 5))
                             .startHour(16)
                             .endHour(17)
                             .build()
             );
 
-            join2.getJoinInfoList().add(
+            join2.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join2)
                             .localDate(LocalDate.of(2021, 3, 6))
                             .startHour(17)
                             .endHour(18)
                             .build()
             );
 
-            join2.getJoinInfoList().add(
+            join2.addJoinInfo(
                     JoinInfo.builder()
+                            .join(join2)
                             .localDate(LocalDate.of(2021, 3, 7))
                             .startHour(18)
                             .endHour(19)

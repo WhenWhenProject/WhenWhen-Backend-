@@ -40,15 +40,4 @@ public class UserDto {
                 .build();
     }
 
-    public User toEntity() {
-        return User.builder()
-                .username(username)
-                .nickName(nickName)
-                .email(email)
-                .profileImageUrl(profileImageUrl)
-                .providerType(providerType)
-                .roleType(roleType)
-                .build();
-    }
-
 }

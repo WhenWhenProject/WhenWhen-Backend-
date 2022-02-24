@@ -1,16 +1,14 @@
 package backend.api.controller;
 
 import backend.api.controller.dto.common.ApiResponse;
+import backend.api.controller.dto.request.JoinEnrollRequest;
 import backend.api.controller.dto.response.JoinInfoResponse;
 import backend.api.service.JoinService;
 import backend.api.service.dto.JoinInfoDto;
 import backend.argumentresolver.CurrentUser;
 import backend.oauth.entity.UserPrincipal;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +29,13 @@ public class JoinController {
                 .collect(Collectors.toList());
 
         return ApiResponse.success("join-info-list", result);
+    }
+
+    @PostMapping("/{planId}")
+    public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody JoinEnrollRequest joinEnrollRequest) {
+        joinService.enrollJoin(userPrincipal.getUsername(), planId, joinEnrollRequest.getJoinInfoRequestList());
+
+        return ApiResponse.success("create", "success");
     }
 
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "_join")
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Join {
 
@@ -24,9 +23,24 @@ public class Join {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "join_id")
+    @OneToMany(mappedBy = "join", cascade = CascadeType.PERSIST)
     private List<JoinInfo> joinInfoList = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public List<JoinInfo> getJoinInfoList() {
+        return new ArrayList<>(joinInfoList);
+    }
 
     @Builder
     private Join(
@@ -38,6 +52,10 @@ public class Join {
 
     public void addJoinInfo(JoinInfo joinInfo) {
         joinInfoList.add(joinInfo);
+    }
+
+    public void changeJoinInfoList(List<JoinInfo> list) {
+        this.joinInfoList = list;
     }
 
 }
