@@ -102,6 +102,19 @@ public class InitDb {
 
             planRepository.save(plan1);
 
+            // 플랜 등록
+            Plan plan2 = Plan.builder()
+                    .host(user1)
+                    .title("소모임")
+                    .startDate(LocalDate.of(2021, 2, 5))
+                    .endDate(LocalDate.of(2021, 2, 7))
+                    .expectedMemberCnt(3L)
+                    .location("건대입구")
+                    .startHour(15)
+                    .build();
+
+            planRepository.save(plan2);
+
             // 투표 정보 등록
             Join join1 = Join.builder()
                     .user(user1)
@@ -167,8 +180,41 @@ public class InitDb {
                             .build()
             );
 
+            Join join3 = Join.builder()
+                    .user(user1)
+                    .plan(plan2)
+                    .build();
+
+            join3.addJoinInfo(
+                    JoinInfo.builder()
+                            .join(join3)
+                            .localDate(LocalDate.of(2021, 2, 5))
+                            .startHour(17)
+                            .endHour(21)
+                            .build()
+            );
+
+            join3.addJoinInfo(
+                    JoinInfo.builder()
+                            .join(join3)
+                            .localDate(LocalDate.of(2021, 2, 6))
+                            .startHour(18)
+                            .endHour(22)
+                            .build()
+            );
+
+            join3.addJoinInfo(
+                    JoinInfo.builder()
+                            .join(join3)
+                            .localDate(LocalDate.of(2021, 2, 7))
+                            .startHour(19)
+                            .endHour(23)
+                            .build()
+            );
+
             joinRepository.save(join1);
             joinRepository.save(join2);
+            joinRepository.save(join3);
         }
 
     }

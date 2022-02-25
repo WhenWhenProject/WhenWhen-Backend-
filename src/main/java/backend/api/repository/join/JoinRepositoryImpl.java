@@ -3,6 +3,7 @@ package backend.api.repository.join;
 import backend.api.entity.Join;
 import backend.api.repository.util.MyQuerydslRepositorySupport;
 
+import java.util.List;
 import java.util.Optional;
 
 import static backend.api.entity.QJoin.join;
@@ -25,6 +26,16 @@ public class JoinRepositoryImpl extends MyQuerydslRepositorySupport implements J
                 .fetchOne();
 
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<Join> findByUsername(String username) {
+        return getQueryFactory()
+                .select(join)
+                .from(join)
+                .join(join.user)
+                .where(join.user.username.eq(username))
+                .fetch();
     }
 
 }

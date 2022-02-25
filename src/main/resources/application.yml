@@ -1,5 +1,8 @@
 spring:
   datasource:
+#    url: jdbc:mysql://whenwhen-db.clnr1cnwsqji.ap-northeast-2.rds.amazonaws.com:3306/whenwhen
+#    username: whenwhenroot
+#    password: root1234
     url: jdbc:mysql://localhost:3306/whenwhen?serverTimezone=Asia/Seoul
     username: root
     password: 1234
@@ -70,7 +73,7 @@ app:
 
   oauth2:
     authorizedRedirectUris:
-      - http://localhost:3000/oauth/redirect
+      - http://localhost:4000/oauth/redirect
 
 logging:
   level:
