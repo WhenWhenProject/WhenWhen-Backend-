@@ -1,0 +1,231 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+= API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+:docinfo: shared-head
+
+[[introduction]]
+== 소개
+
+WhenWhen API
+
+[[common]]
+
+== 공통 사항
+
+API 에 관계없이 아래 사항을 지켜주셔야 합니다.
+
+=== Domain
+
+|===
+| 환경 | Domain
+
+| 개발 서버
+| `https://localhost:8080`
+
+| 운영 서버
+| `https://xxx.xxx.com`
+|===
+
+== 유저 API
+
+[[user-sign-up]]
+=== [ 회원가입 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-auth-sign-up/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-auth-sign-up/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-auth-sign-up/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-auth-sign-up/http-response.adoc[]
+
+&#160;
+
+[[user-login]]
+=== [ 로그인 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-auth-login/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-auth-login/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-auth-login/response-headers.adoc[]
+
+include::{snippets}/api-auth-login/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-auth-login/http-response.adoc[]
+
+&#160;
+
+[[user-refresh]]
+=== [ 엑세스 토큰 or 리프레시 토큰 갱신 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-auth-refresh/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-auth-refresh/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-auth-refresh/response-headers.adoc[]
+
+include::{snippets}/api-auth-refresh/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-auth-login/http-response.adoc[]
+
+&#160;
+
+[[user-get-info]]
+=== [ 내 정보 불러오기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-user-get-my-info/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-user-get-my-info/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-user-get-my-info/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-user-get-my-info/http-response.adoc[]
+
+&#160;
+
+[[user-patch-info]]
+=== [ 내 정보 변경하기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-user-patch-my-info/request-headers.adoc[]
+
+include::{snippets}/api-auth-refresh/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-user-patch-my-info/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-user-patch-my-info/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-user-patch-my-info/http-response.adoc[]
+
+&#160;
+
+//
+//[[units-find]]
+//=== 단건 조회
+//
+//==== Request
+//
+//include::{snippets}/units-find/path-parameters.adoc[]
+//
+//===== Request HTTP Example
+//
+//include::{snippets}/units-find/http-request.adoc[]
+//
+//==== Response
+//
+//include::{snippets}/units-find/response-fields-data.adoc[]
+//
+//===== Response HTTP Example:
+//
+//include::{snippets}/units-find/http-response.adoc[]
+//
+//&#160;
+//
+//[[units-find-all]]
+//=== 다건 조회
+//
+//==== Request
+//
+//===== Request HTTP Example
+//
+//include::{snippets}/units-find-all/http-request.adoc[]
+//
+//==== Response
+//
+//include::{snippets}/units-find-all/response-fields-data.adoc[]
+//
+//===== Response HTTP Example:
+//
+//include::{snippets}/units-find-all/http-response.adoc[]
+//
+//&#160;
+//
+//[[units-update]]
+//=== 수정
+//
+//==== Request
+//
+//include::{snippets}/units-update/path-parameters.adoc[]
+//
+//include::{snippets}/units-update/request-fields.adoc[]
+//
+//===== Request HTTP Example
+//
+//include::{snippets}/units-update/http-request.adoc[]
+//
+//==== Response
+//
+//include::{snippets}/units-update/response-fields-data.adoc[]
+//
+//===== Response HTTP Example:
+//
+//include::{snippets}/units-update/http-response.adoc[]
+//
+//&#160;
+//
+//[[units-delete]]
+//=== 삭제
+//
+//==== Request
+//
+//include::{snippets}/units-delete/path-parameters.adoc[]
+//
+//===== Request HTTP Example
+//
+//include::{snippets}/units-delete/http-request.adoc[]
+//
+//==== Response
+//
+//===== Response HTTP Example:
+//
+//include::{snippets}/units-delete/http-response.adoc[]
+//
+//&#160;

@@ -51,19 +51,18 @@ public class AuthController {
     }
 
     @GetMapping("/refresh")
-    public ApiResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
+    public ApiResponse<String> refreshToken(HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
         AuthToken accessToken = tokenProvider.convertAuthToken(HeaderUtil.getAuthToken(request));
 
-        if (!accessToken.validate()) {
-            return ApiResponse.invalidAccessToken();
-        }
+        Claims claims = accessToken.getTokenClaimsWithExpiredExceptionNotNull();
+        if(claims == null) return ApiResponse.invalidAccessToken();
 
         // expired access token 인지 확인
-        Claims claims = accessToken.getExpiredTokenClaims();
-        if (claims == null) {
-            return ApiResponse.notExpiredTokenYet();
-        }
+//        Claims claims = accessToken.getExpiredTokenClaims();
+//        if (claims == null) {
+//            return ApiResponse.notExpiredTokenYet();
+//        }
 
         String username = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));

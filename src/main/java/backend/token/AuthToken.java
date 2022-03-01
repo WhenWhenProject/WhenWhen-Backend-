@@ -53,6 +53,29 @@ public class AuthToken {
         return this.getTokenClaims() != null;
     }
 
+    public Claims getTokenClaimsWithExpiredExceptionNotNull() {
+        System.out.println("AuthToken.getTokenClaimsWithExpiredExceptionNotNull()");
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (SecurityException e) {
+            System.out.println("Invalid JWT signature.");
+        } catch (MalformedJwtException e) {
+            System.out.println("Invalid JWT token.");
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        } catch (UnsupportedJwtException e) {
+            System.out.println("Unsupported JWT token.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("JWT token compact of handler are invalid.");
+        }
+
+        return null;
+    }
+
     public Claims getTokenClaims() {
         System.out.println("AuthToken.getTokenClaims()");
         try {
