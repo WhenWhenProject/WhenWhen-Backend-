@@ -131,7 +131,7 @@ include::{snippets}/api-user-get-my-info/http-response.adoc[]
 
 include::{snippets}/api-user-patch-my-info/request-headers.adoc[]
 
-include::{snippets}/api-auth-refresh/request-fields.adoc[]
+include::{snippets}/api-user-patch-my-info/request-fields.adoc[]
 
 ===== Request HTTP 예시
 
@@ -147,85 +147,140 @@ include::{snippets}/api-user-patch-my-info/http-response.adoc[]
 
 &#160;
 
-//
-//[[units-find]]
-//=== 단건 조회
-//
-//==== Request
-//
-//include::{snippets}/units-find/path-parameters.adoc[]
-//
-//===== Request HTTP Example
-//
-//include::{snippets}/units-find/http-request.adoc[]
-//
-//==== Response
-//
-//include::{snippets}/units-find/response-fields-data.adoc[]
-//
-//===== Response HTTP Example:
-//
-//include::{snippets}/units-find/http-response.adoc[]
-//
-//&#160;
-//
-//[[units-find-all]]
-//=== 다건 조회
-//
-//==== Request
-//
-//===== Request HTTP Example
-//
-//include::{snippets}/units-find-all/http-request.adoc[]
-//
-//==== Response
-//
-//include::{snippets}/units-find-all/response-fields-data.adoc[]
-//
-//===== Response HTTP Example:
-//
-//include::{snippets}/units-find-all/http-response.adoc[]
-//
-//&#160;
-//
-//[[units-update]]
-//=== 수정
-//
-//==== Request
-//
-//include::{snippets}/units-update/path-parameters.adoc[]
-//
-//include::{snippets}/units-update/request-fields.adoc[]
-//
-//===== Request HTTP Example
-//
-//include::{snippets}/units-update/http-request.adoc[]
-//
-//==== Response
-//
-//include::{snippets}/units-update/response-fields-data.adoc[]
-//
-//===== Response HTTP Example:
-//
-//include::{snippets}/units-update/http-response.adoc[]
-//
-//&#160;
-//
-//[[units-delete]]
-//=== 삭제
-//
-//==== Request
-//
-//include::{snippets}/units-delete/path-parameters.adoc[]
-//
-//===== Request HTTP Example
-//
-//include::{snippets}/units-delete/http-request.adoc[]
-//
-//==== Response
-//
-//===== Response HTTP Example:
-//
-//include::{snippets}/units-delete/http-response.adoc[]
-//
-//&#160;
+[[plan-host-all]]
+=== [ 내가 생성한 모든 일정 불러오기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-plan-host-all/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-plan-host-all/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-plan-host-all/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-plan-host-all/http-response.adoc[]
+
+&#160;
+
+[[plan-all]]
+=== [ 내가 참여한 모든 일정 불러오기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-plan-all/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-plan-all/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-plan-all/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-plan-all/http-response.adoc[]
+
+&#160;
+
+[[plan-create]]
+=== [ 일정 생성하기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-plan-enroll/request-headers.adoc[]
+
+include::{snippets}/api-plan-enroll/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-plan-enroll/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-plan-enroll/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-plan-enroll/http-response.adoc[]
+
+&#160;
+
+[[plan-delete]]
+=== [ 일정 삭제하기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-plan-delete/path-parameters.adoc[]
+
+include::{snippets}/api-plan-delete/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-plan-delete/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-plan-delete/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-plan-delete/http-response.adoc[]
+
+&#160;
+
+[[join-find]]
+=== [ 일정 참여 정보 조회 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-join-find/path-parameters.adoc[]
+
+include::{snippets}/api-join-find/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-join-find/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-join-find/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-join-find/http-response.adoc[]
+
+&#160;
+
+
+[[join-find]]
+=== [ 일정 참여 정보 등록 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-join-enroll/path-parameters.adoc[]
+
+include::{snippets}/api-join-enroll/request-headers.adoc[]
+
+include::{snippets}/api-join-enroll/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-join-enroll/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-join-enroll/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-join-enroll/http-response.adoc[]
+
+&#160;
+
