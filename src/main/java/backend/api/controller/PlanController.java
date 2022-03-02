@@ -21,8 +21,8 @@ public class PlanController {
     private final PlanService planService;
 
     @GetMapping("/host/all")
-    public ApiResponse<List<PlanResponse>> getAllPlanCreatedByMe(@CurrentUser UserPrincipal userPrincipal) {
-        List<PlanDto> planDtoList = planService.getAllPlanCreatedByMe(userPrincipal.getUsername());
+    public ApiResponse<List<PlanResponse>> findAllCreatedByMe(@CurrentUser UserPrincipal userPrincipal) {
+        List<PlanDto> planDtoList = planService.findAllCreatedByMe(userPrincipal.getUsername());
 
         List<PlanResponse> result = planDtoList.stream()
                 .map(planDto -> PlanResponse.of(planDto))
@@ -32,8 +32,8 @@ public class PlanController {
     }
 
     @GetMapping("/all")
-    public ApiResponse<List<PlanResponse>> getAllPlanParticipatedIn(@CurrentUser UserPrincipal userPrincipal) {
-        List<PlanDto> planDtoList = planService.getAllPlanParticipatedIn(userPrincipal.getUsername());
+    public ApiResponse<List<PlanResponse>> findAllParticipatedIn(@CurrentUser UserPrincipal userPrincipal) {
+        List<PlanDto> planDtoList = planService.findAllParticipatedIn(userPrincipal.getUsername());
 
         List<PlanResponse> result = planDtoList.stream()
                 .map(planDto -> PlanResponse.of(planDto))
@@ -43,15 +43,15 @@ public class PlanController {
     }
 
     @PostMapping
-    public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @RequestBody PlanEnrollRequest planEnrollRequest) {
-        planService.createPlan(userPrincipal.getUsername(), planEnrollRequest);
+    public ApiResponse<String> create(@CurrentUser UserPrincipal userPrincipal, @RequestBody PlanEnrollRequest planEnrollRequest) {
+        planService.create(userPrincipal.getUsername(), planEnrollRequest);
 
         return ApiResponse.success("create", "success");
     }
 
     @DeleteMapping("/{planId}")
     public ApiResponse<String> delete(@CurrentUser UserPrincipal userPrincipal, @PathVariable Long planId) {
-        planService.deletePlan(userPrincipal.getUsername(), planId);
+        planService.delete(userPrincipal.getUsername(), planId);
 
         return ApiResponse.success("delete", "success");
     }

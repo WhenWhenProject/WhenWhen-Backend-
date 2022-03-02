@@ -3,11 +3,7 @@ package backend.oauth.exception;
 public class TokenValidFailedException extends RuntimeException {
 
     public TokenValidFailedException() {
-        super("Failed to generate Token.");
-    }
-
-    private TokenValidFailedException(String message) {
-        super(message);
+        super("유효하지 않은 토큰입니다.");
     }
 
 }

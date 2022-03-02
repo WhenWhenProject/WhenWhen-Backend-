@@ -4,7 +4,6 @@ import backend.api.entity.Plan;
 import backend.api.repository.util.MyQuerydslRepositorySupport;
 import com.querydsl.jpa.JPAExpressions;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static backend.api.entity.QJoin.join;
@@ -28,7 +27,7 @@ public class PlanRepositoryImpl extends MyQuerydslRepositorySupport implements P
     }
 
     @Override
-    public List<Plan> findAllByPlanIdListWithHostFetchJoin(List<Long> planIdList) {
+    public List<Plan> findAllByPlanIdList(List<Long> planIdList) {
         return getQueryFactory()
                 .select(plan)
                 .from(plan)
@@ -38,7 +37,7 @@ public class PlanRepositoryImpl extends MyQuerydslRepositorySupport implements P
     }
 
     @Override
-    public List<Plan> findAllParticipatedPlanByUsername(String username) {
+    public List<Plan> findAllParticipatingPlanByUsername(String username) {
         return getQueryFactory()
                 .select(plan)
                 .from(plan)

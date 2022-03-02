@@ -21,19 +21,19 @@ public class JoinController {
     private final JoinService joinService;
 
     @GetMapping("/{planId}")
-    public ApiResponse<List<JoinInfoResponse>> find(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId) {
-        List<JoinInfoDto> joinInfoList = joinService.findJoinInfoList(userPrincipal.getUsername(), planId);
+    public ApiResponse<List<JoinInfoResponse>> findAll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId) {
+        List<JoinInfoDto> joinInfoList = joinService.findAll(userPrincipal.getUsername(), planId);
 
         List<JoinInfoResponse> result = joinInfoList.stream()
                 .map(joinInfoDto -> JoinInfoResponse.of(joinInfoDto))
                 .collect(Collectors.toList());
 
-        return ApiResponse.success("join-info-list", result);
+        return ApiResponse.success("list", result);
     }
 
     @PostMapping("/{planId}")
     public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody JoinEnrollRequest joinEnrollRequest) {
-        joinService.enrollJoin(userPrincipal.getUsername(), planId, joinEnrollRequest.getJoinInfoRequestList());
+        joinService.enroll(userPrincipal.getUsername(), planId, joinEnrollRequest.getJoinInfoRequestList());
 
         return ApiResponse.success("create", "success");
     }

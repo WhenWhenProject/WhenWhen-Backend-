@@ -1,14 +1,13 @@
 package backend.initializer;
 
-import backend.api.entity.*;
+import backend.api.entity.Join;
+import backend.api.entity.JoinInfo;
+import backend.api.entity.Plan;
+import backend.api.entity.User;
 import backend.api.repository.join.JoinRepository;
 import backend.api.repository.plan.PlanRepository;
 import backend.api.repository.user.UserRepository;
-import backend.api.repository.user_refresh_token.UserRefreshTokenRepository;
-import backend.config.properties.AppProperties;
 import backend.oauth.entity.RoleType;
-import backend.token.AuthToken;
-import backend.token.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -16,9 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.Date;
 
-@Component
+// @Component
 @RequiredArgsConstructor
 public class InitDb {
 
@@ -38,9 +36,6 @@ public class InitDb {
         private final UserRepository userRepository;
         private final PlanRepository planRepository;
         private final JoinRepository joinRepository;
-        private final AuthTokenProvider tokenProvider;
-        private final AppProperties appProperties;
-        private final UserRefreshTokenRepository userRefreshTokenRepository;
 
         public void dbInit() {
             // 유저 등록
@@ -62,32 +57,6 @@ public class InitDb {
 
             userRepository.save(user1);
             userRepository.save(user2);
-
-            // 유저 리프레시 토큰 등록
-            // 리프레시 토큰 db 저장 및 쿠키에 담기
-            Date now = new Date();
-            AuthToken refreshToken1 = tokenProvider.createAuthToken(
-                    appProperties.getAuth().getTokenSecret(),
-                    new Date(now.getTime() + appProperties.getAuth().getRefreshTokenExpiry())
-            );
-
-            UserRefreshToken userRefreshToken1 = UserRefreshToken.builder()
-                    .username(user1.getUsername())
-                    .refreshToken(refreshToken1.getToken())
-                    .build();
-
-            AuthToken refreshToken2 = tokenProvider.createAuthToken(
-                    appProperties.getAuth().getTokenSecret(),
-                    new Date(now.getTime() + 10 + appProperties.getAuth().getRefreshTokenExpiry())
-            );
-
-            UserRefreshToken userRefreshToken2 = UserRefreshToken.builder()
-                    .username(user2.getUsername())
-                    .refreshToken(refreshToken2.getToken())
-                    .build();
-
-            userRefreshTokenRepository.save(userRefreshToken1);
-            userRefreshTokenRepository.save(userRefreshToken2);
 
             // 플랜 등록
             Plan plan1 = Plan.builder()

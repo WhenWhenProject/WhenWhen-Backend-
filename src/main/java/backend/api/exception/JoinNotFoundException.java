@@ -6,8 +6,4 @@ public class JoinNotFoundException extends RuntimeException {
         super("참여 정보를 찾을 수 없습니다.");
     }
 
-    public JoinNotFoundException(String message) {
-        super(message);
-    }
-
 }

@@ -123,4 +123,5 @@ public class UserPrincipal implements UserDetails, OAuth2User, OidcUser {
         );
     }
 
+
 }

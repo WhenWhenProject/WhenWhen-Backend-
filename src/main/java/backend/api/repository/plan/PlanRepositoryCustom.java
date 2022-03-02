@@ -8,8 +8,8 @@ public interface PlanRepositoryCustom {
 
     List<Plan> findAllByHostUsername(String username);
 
-    List<Plan> findAllByPlanIdListWithHostFetchJoin(List<Long> planIdList);
+    List<Plan> findAllByPlanIdList(List<Long> planIdList);
 
-    List<Plan> findAllParticipatedPlanByUsername(String username);
+    List<Plan> findAllParticipatingPlanByUsername(String username);
 
 }

@@ -36,7 +36,7 @@ API 에 관계없이 아래 사항을 지켜주셔야 합니다.
 
 == 유저 API
 
-[[user-sign-up]]
+[[api-auth-sign-up]]
 === [ 회원가입 ]
 
 ==== - REQUEST -
@@ -57,7 +57,7 @@ include::{snippets}/api-auth-sign-up/http-response.adoc[]
 
 &#160;
 
-[[user-login]]
+[[api-auth-login]]
 === [ 로그인 ]
 
 ==== - REQUEST -
@@ -80,8 +80,8 @@ include::{snippets}/api-auth-login/http-response.adoc[]
 
 &#160;
 
-[[user-refresh]]
-=== [ 엑세스 토큰 or 리프레시 토큰 갱신 ]
+[[api-auth-refresh]]
+=== [ 토큰 갱신 ]
 
 ==== - REQUEST -
 
@@ -99,120 +99,122 @@ include::{snippets}/api-auth-refresh/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-auth-login/http-response.adoc[]
+include::{snippets}/api-auth-refresh/http-response.adoc[]
 
 &#160;
 
-[[user-get-info]]
+[[api-user-find]]
 === [ 내 정보 불러오기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-user-get-my-info/request-headers.adoc[]
+include::{snippets}/api-user-find/request-headers.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-user-get-my-info/http-request.adoc[]
+include::{snippets}/api-user-find/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-user-get-my-info/response-fields.adoc[]
+include::{snippets}/api-user-find/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-user-get-my-info/http-response.adoc[]
+include::{snippets}/api-user-find/http-response.adoc[]
 
 &#160;
 
-[[user-patch-info]]
+[[api-user-update]]
 === [ 내 정보 변경하기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-user-patch-my-info/request-headers.adoc[]
+include::{snippets}/api-user-update/request-headers.adoc[]
 
-include::{snippets}/api-user-patch-my-info/request-fields.adoc[]
+include::{snippets}/api-user-update/request-fields.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-user-patch-my-info/http-request.adoc[]
+include::{snippets}/api-user-update/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-user-patch-my-info/response-fields.adoc[]
+include::{snippets}/api-user-update/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-user-patch-my-info/http-response.adoc[]
+include::{snippets}/api-user-update/http-response.adoc[]
 
 &#160;
 
-[[plan-host-all]]
+== 일정 API
+
+[[api-plan-findAllCreatedByMe]]
 === [ 내가 생성한 모든 일정 불러오기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-plan-host-all/request-headers.adoc[]
+include::{snippets}/api-plan-findAllCreatedByMe/request-headers.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-plan-host-all/http-request.adoc[]
+include::{snippets}/api-plan-findAllCreatedByMe/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-plan-host-all/response-fields.adoc[]
+include::{snippets}/api-plan-findAllCreatedByMe/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-plan-host-all/http-response.adoc[]
+include::{snippets}/api-plan-findAllCreatedByMe/http-response.adoc[]
 
 &#160;
 
-[[plan-all]]
+[[api-plan-findAllParticipatedIn]]
 === [ 내가 참여한 모든 일정 불러오기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-plan-all/request-headers.adoc[]
+include::{snippets}/api-plan-findAllParticipatedIn/request-headers.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-plan-all/http-request.adoc[]
+include::{snippets}/api-plan-findAllParticipatedIn/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-plan-all/response-fields.adoc[]
+include::{snippets}/api-plan-findAllParticipatedIn/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-plan-all/http-response.adoc[]
+include::{snippets}/api-plan-findAllParticipatedIn/http-response.adoc[]
 
 &#160;
 
-[[plan-create]]
+[[api-plan-create]]
 === [ 일정 생성하기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-plan-enroll/request-headers.adoc[]
+include::{snippets}/api-plan-create/request-headers.adoc[]
 
-include::{snippets}/api-plan-enroll/request-fields.adoc[]
+include::{snippets}/api-plan-create/request-fields.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-plan-enroll/http-request.adoc[]
+include::{snippets}/api-plan-create/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-plan-enroll/response-fields.adoc[]
+include::{snippets}/api-plan-create/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-plan-enroll/http-response.adoc[]
+include::{snippets}/api-plan-create/http-response.adoc[]
 
 &#160;
 
-[[plan-delete]]
+[[api-plan-delete]]
 === [ 일정 삭제하기 ]
 
 ==== - REQUEST -
@@ -235,31 +237,32 @@ include::{snippets}/api-plan-delete/http-response.adoc[]
 
 &#160;
 
-[[join-find]]
+== 참여 API
+
+[[api-join-findAll]]
 === [ 일정 참여 정보 조회 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-join-find/path-parameters.adoc[]
+include::{snippets}/api-join-findAll/path-parameters.adoc[]
 
-include::{snippets}/api-join-find/request-headers.adoc[]
+include::{snippets}/api-join-findAll/request-headers.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-join-find/http-request.adoc[]
+include::{snippets}/api-join-findAll/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-join-find/response-fields.adoc[]
+include::{snippets}/api-join-findAll/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-join-find/http-response.adoc[]
+include::{snippets}/api-join-findAll/http-response.adoc[]
 
 &#160;
 
-
-[[join-find]]
+[[api-join-enroll]]
 === [ 일정 참여 정보 등록 ]
 
 ==== - REQUEST -

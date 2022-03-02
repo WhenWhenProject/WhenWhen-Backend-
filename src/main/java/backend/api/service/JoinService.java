@@ -22,7 +22,7 @@ public class JoinService {
     private final JoinRepository joinRepository;
     private final JoinInfoRepository joinInfoRepository;
 
-    public List<JoinInfoDto> findJoinInfoList(String username, Long planId) {
+    public List<JoinInfoDto> findAll(String username, Long planId) {
         Join join = joinRepository.findByUsernameAndPlanId(username, planId)
                 .orElseThrow(JoinNotFoundException::new);
 
@@ -32,7 +32,7 @@ public class JoinService {
     }
 
     @Transactional
-    public void enrollJoin(String username, Long planId, List<JoinInfoRequest> joinInfoRequestList) {
+    public void enroll(String username, Long planId, List<JoinInfoRequest> joinInfoRequestList) {
         Join join = joinRepository.findByUsernameAndPlanId(username, planId)
                 .orElseThrow(JoinNotFoundException::new);
 
