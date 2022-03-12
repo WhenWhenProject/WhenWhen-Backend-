@@ -271,7 +271,7 @@ include::{snippets}/api-join-enroll/path-parameters.adoc[]
 
 include::{snippets}/api-join-enroll/request-headers.adoc[]
 
-include::{snippets}/api-join-enroll/request-fields.adoc[]
+include::{snippets}/api-join-enroll/request-fields-list.adoc[]
 
 ===== Request HTTP 예시
 

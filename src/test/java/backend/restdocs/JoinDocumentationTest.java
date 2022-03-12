@@ -73,10 +73,10 @@ public class JoinDocumentationTest extends ApiDocumentationTest {
                                 headerWithName(HEADER_ACCESS_TOKEN).description("엑세스 토큰"),
                                 headerWithName(HEADER_REFRESH_TOKEN).description("리프레시 토큰")
                         ),
-                        requestFields(
-                                fieldWithPath("joinInfoRequestList.[].localDate").type(JsonFieldType.STRING).description("일정 제목"),
-                                fieldWithPath("joinInfoRequestList.[].startHour").type(JsonFieldType.NUMBER).description("시작 시간"),
-                                fieldWithPath("joinInfoRequestList.[].endHour").type(JsonFieldType.NUMBER).description("끝 시간")
+                        requestFields(beneathPath("joinInfoRequestList.[]").withSubsectionId("list"),
+                                fieldWithPath("localDate").type(JsonFieldType.STRING).description("일정 제목"),
+                                fieldWithPath("startHour").type(JsonFieldType.NUMBER).description("시작 시간"),
+                                fieldWithPath("endHour").type(JsonFieldType.NUMBER).description("끝 시간")
                         ),
                         responseFields(
                                 fieldWithPath("header.code").type(JsonFieldType.NUMBER).description("응답 코드"),

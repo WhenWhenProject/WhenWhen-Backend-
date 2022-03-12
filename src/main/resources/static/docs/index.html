@@ -699,6 +699,9 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -855,6 +858,9 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -862,8 +868,8 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Content-Length: 116
 
 {
@@ -917,8 +923,8 @@ Content-Length: 116
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/auth/refresh HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -996,6 +1002,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1003,8 +1012,8 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Content-Length: 118
 
 {
@@ -1058,8 +1067,8 @@ Content-Length: 118
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/my-info HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1136,6 +1145,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1240,8 +1252,8 @@ Content-Length: 266
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PATCH /api/user/my-info HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Content-Length: 57
 Host: localhost:8080
@@ -1324,6 +1336,9 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1395,8 +1410,8 @@ Content-Length: 266
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/plan/host/all HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1503,6 +1518,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1526,7 +1544,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "3ecbaa65-9dea-47da-8e98-b96331ef40fd",
+      "linkUrl" : "a70c95e5-5e50-4ac2-b9d6-d6589e9a1e1c",
       "location" : "왕십리",
       "startHour" : 16
     }, {
@@ -1537,7 +1555,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "2d1ff456-ea5c-46f5-9534-19c4843ca46b",
+      "linkUrl" : "ffde09a9-5dc2-4a0e-be3a-90bd893f4d81",
       "location" : "왕십리",
       "startHour" : 16
     }, {
@@ -1548,7 +1566,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "85f9ef02-9761-4c91-bcf3-0a52c1e9dcd5",
+      "linkUrl" : "a077551d-a680-4bd8-ad63-58380818083d",
       "location" : "왕십리",
       "startHour" : 16
     } ]
@@ -1596,8 +1614,8 @@ Content-Length: 1134
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/plan/all HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1704,6 +1722,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1727,7 +1748,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "d5a9329e-4ca0-4f1f-a9d8-143ce28889b5",
+      "linkUrl" : "e90b1e75-5a5e-4ca4-b72d-f6b7243c0a1f",
       "location" : "왕십리",
       "startHour" : 16
     }, {
@@ -1738,7 +1759,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "a78f678a-59bd-4b32-a1fa-56030a47c1b2",
+      "linkUrl" : "2e298117-0fa1-4b18-8457-a32a7e274b43",
       "location" : "왕십리",
       "startHour" : 16
     }, {
@@ -1749,7 +1770,7 @@ Content-Length: 1134
       "endDate" : "2017-03-06",
       "expectedMemberCnt" : 5,
       "fixed" : false,
-      "linkUrl" : "66648eec-2899-4eee-ba85-05c1fb84af7d",
+      "linkUrl" : "be7eedc8-99ec-4c51-9328-495591494555",
       "location" : "왕십리",
       "startHour" : 16
     } ]
@@ -1863,8 +1884,8 @@ Content-Length: 1134
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/plan/ HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Content-Length: 171
 Host: localhost:8080
@@ -1927,6 +1948,9 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -2017,8 +2041,8 @@ Content-Length: 117
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/plan/1 HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -2071,6 +2095,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -2166,8 +2193,8 @@ Content-Length: 117
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/join/1 HTTP/1.1
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -2232,6 +2259,9 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -2350,21 +2380,21 @@ Content-Length: 384
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>joinInfoRequestList.[].localDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>localDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">일정 제목</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>joinInfoRequestList.[].startHour</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>startHour</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">시작 시간</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>joinInfoRequestList.[].endHour</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endHour</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2379,8 +2409,8 @@ Content-Length: 384
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/join/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjUwNzQ4fQ.MZSORqVitzVNU0IkP5108QD2E-tZnDjuXtFJu287Gzk
-refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2MjQ4OTQ4fQ.Nd9cGdoGhUtNe8mzbv68BlGdkAZtWKCL6Tcvv4vnegI
+access: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU4MjI2fQ.gY5xXL9GXb2HUD0AiHFH3nuIbKHZSc7EtXU1q5NVoy0
+refresh: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMxMjMiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjQ2NzU2NDI2fQ.kZydchO5EEBv2fn6f1qD0DXSbTjrYg9eBnMmoAIs2ew
 Accept: application/json
 Content-Length: 286
 Host: localhost:8080
@@ -2450,6 +2480,9 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -2482,7 +2515,7 @@ Content-Length: 117
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-03-03 04:21:51 +0900
+Last updated 2022-03-05 23:40:52 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
