@@ -2,6 +2,7 @@ package backend.api.exception.advice;
 
 import backend.api.controller.dto.common.ApiResponse;
 import backend.api.exception.JoinNotFoundException;
+import backend.api.exception.PasswordMisMatchException;
 import backend.api.exception.PlanNotFoundException;
 import backend.api.exception.UserNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,11 @@ public class ExControllerAdvice {
 
     @ExceptionHandler(JoinNotFoundException.class)
     public ApiResponse<String> joinNotFoundExHandler(JoinNotFoundException e) {
+        return ApiResponse.fail(e.getMessage());
+    }
+
+    @ExceptionHandler(PasswordMisMatchException.class)
+    public ApiResponse<String> passwordMisMatchExHandler(PasswordMisMatchException e) {
         return ApiResponse.fail(e.getMessage());
     }
 

@@ -4,6 +4,7 @@ import backend.api.controller.dto.request.ChangeUserRequest;
 import backend.api.controller.dto.request.LoginRequest;
 import backend.api.controller.dto.request.SignUpRequest;
 import backend.api.entity.User;
+import backend.api.exception.PasswordMisMatchException;
 import backend.api.exception.UserNotFoundException;
 import backend.api.repository.user.UserRepository;
 import backend.api.service.dto.UserDto;
@@ -53,8 +54,10 @@ public class UserService {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
-        User user = userRepository.findByUsernameAndPassword(username, passwordEncoder.encode(password))
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(UserNotFoundException::new);
+
+        if(!passwordEncoder.matches(password, user.getPassword())) throw new PasswordMisMatchException();
 
         JwtToken jwtToken = jwtTokenProvider.createJwtToken(username, user.getRoleType().getCode());
 
