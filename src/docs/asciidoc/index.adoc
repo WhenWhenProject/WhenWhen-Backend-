@@ -31,7 +31,7 @@ API 에 관계없이 아래 사항을 지켜주셔야 합니다.
 | `https://localhost:8080`
 
 | 운영 서버
-| `13.125.111.105`
+| `ec2-13-125-111-105.ap-northeast-2.compute.amazonaws.com:8080`
 |===
 
 == 유저 API
