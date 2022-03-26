@@ -18,6 +18,11 @@ public class AuthController {
 
     private final UserService userService;
 
+    @GetMapping("/test")
+    public ApiResponse<String> test() {
+        return ApiResponse.success("test", "success");
+    }
+
     @PostMapping("/sign-up")
     public ApiResponse<String> signUp(@Validated @RequestBody SignUpRequest signUpRequest) {
         userService.signUp(signUpRequest);

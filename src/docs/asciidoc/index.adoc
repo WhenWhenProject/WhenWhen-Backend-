@@ -57,8 +57,26 @@ include::{snippets}/api-auth-sign-up/http-response.adoc[]
 
 &#160;
 
+[[api-oauth2-login]]
+=== [ Oauth2 로그인 ]
+
+|===
+| Provider | URI
+
+| google
+| /oauth2/authorization/google
+
+| kakao
+| /oauth2/authorization/kakao
+
+| naver
+| /oauth2/authorization/naver
+|===
+
+&#160;
+
 [[api-auth-login]]
-=== [ 로그인 ]
+=== [ 서버 로그인 ]
 
 ==== - REQUEST -
 

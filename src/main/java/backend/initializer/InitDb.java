@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 
-// @Component
+@Component
 @RequiredArgsConstructor
 public class InitDb {
 

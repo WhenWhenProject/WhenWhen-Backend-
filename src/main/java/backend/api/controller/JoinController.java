@@ -34,8 +34,15 @@ public class JoinController {
     @PostMapping("/{planId}")
     public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody JoinEnrollRequest joinEnrollRequest) {
         joinService.enroll(userPrincipal.getUsername(), planId, joinEnrollRequest.getJoinInfoRequestList());
-
         return ApiResponse.success("create", "success");
     }
+
+//    @DsssseleteMapping("/{planId}")
+//    public ApiResponse<String> delete(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId) {
+//        joinService.delete(userPrincipal.getUsername(), planId);
+//
+//        return ApiResponse.success("delete", "success");
+//    }
+
 
 }

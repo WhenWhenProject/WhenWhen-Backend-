@@ -50,4 +50,12 @@ public class JoinService {
                 });
     }
 
+    @Transactional
+    public void delete(String username, Long planId) {
+        Join join = joinRepository.findByUsernameAndPlanId(username, planId)
+                .orElseThrow(JoinNotFoundException::new);
+
+        joinInfoRepository.deleteByJoin(join);
+    }
+
 }
