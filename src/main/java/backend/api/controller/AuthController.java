@@ -3,13 +3,14 @@ package backend.api.controller;
 import backend.api.controller.dto.common.ApiResponse;
 import backend.api.controller.dto.request.LoginRequest;
 import backend.api.controller.dto.request.SignUpRequest;
+import backend.api.controller.dto.request.TokenRefreshRequest;
 import backend.api.service.UserService;
+import backend.token.JwtToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,30 +19,25 @@ public class AuthController {
 
     private final UserService userService;
 
-    @GetMapping("/test")
-    public ApiResponse<String> test() {
-        return ApiResponse.success("test", "success");
-    }
-
     @PostMapping("/sign-up")
     public ApiResponse<String> signUp(@Validated @RequestBody SignUpRequest signUpRequest) {
         userService.signUp(signUpRequest);
 
-        return ApiResponse.success("signUp", "success");
+        return new ApiResponse<>("success");
     }
 
     @PostMapping("/login")
-    public ApiResponse<String> login(HttpServletResponse response, @RequestBody LoginRequest loginRequest) {
-        userService.login(response, loginRequest);
+    public ApiResponse<JwtToken> login(@RequestBody LoginRequest loginRequest) {
+        JwtToken jwtToken = userService.login(loginRequest);
 
-        return ApiResponse.success("login", "success");
+        return new ApiResponse<>(jwtToken);
     }
 
     @GetMapping("/refresh")
-    public ApiResponse<String> refresh(HttpServletRequest request, HttpServletResponse response) {
-        userService.refresh(request, response);
+    public ApiResponse<JwtToken> refresh(TokenRefreshRequest tokenRefreshRequest) {
+        JwtToken jwtToken = userService.refresh(tokenRefreshRequest);
 
-        return ApiResponse.success("refresh", "success");
+        return new ApiResponse<>(jwtToken);
     }
 
 }

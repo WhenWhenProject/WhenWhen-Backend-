@@ -28,7 +28,7 @@ public class PlanController {
                 .map(planDto -> PlanResponse.of(planDto))
                 .collect(Collectors.toList());
 
-        return ApiResponse.success("list", result);
+        return new ApiResponse<>(result);
     }
 
     @GetMapping("/all")
@@ -39,21 +39,43 @@ public class PlanController {
                 .map(planDto -> PlanResponse.of(planDto))
                 .collect(Collectors.toList());
 
-        return ApiResponse.success("list", result);
+        return new ApiResponse<>(result);
+    }
+
+    @GetMapping("/fixed/all")
+    public ApiResponse<List<PlanResponse>> findAllFixed(@CurrentUser UserPrincipal userPrincipal) {
+        List<PlanDto> planDtoList = planService.findAllFixed(userPrincipal.getUsername());
+
+        List<PlanResponse> result = planDtoList.stream()
+                .map(planDto -> PlanResponse.of(planDto))
+                .collect(Collectors.toList());
+
+        return new ApiResponse<>(result);
+    }
+
+    @GetMapping("/unfixed/all")
+    public ApiResponse<List<PlanResponse>> findAllUnfixed(@CurrentUser UserPrincipal userPrincipal) {
+        List<PlanDto> planDtoList = planService.findAllUnfixed(userPrincipal.getUsername());
+
+        List<PlanResponse> result = planDtoList.stream()
+                .map(planDto -> PlanResponse.of(planDto))
+                .collect(Collectors.toList());
+
+        return new ApiResponse<>(result);
     }
 
     @PostMapping
     public ApiResponse<String> create(@CurrentUser UserPrincipal userPrincipal, @RequestBody PlanEnrollRequest planEnrollRequest) {
         planService.create(userPrincipal.getUsername(), planEnrollRequest);
 
-        return ApiResponse.success("create", "success");
+        return new ApiResponse<>("success");
     }
 
     @DeleteMapping("/{planId}")
     public ApiResponse<String> delete(@CurrentUser UserPrincipal userPrincipal, @PathVariable Long planId) {
         planService.delete(userPrincipal.getUsername(), planId);
 
-        return ApiResponse.success("delete", "success");
+        return new ApiResponse<>("success");
     }
 
 }

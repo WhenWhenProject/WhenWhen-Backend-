@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static backend.util.HeaderConstant.HEADER_ACCESS_TOKEN;
+import static backend.util.HeaderConstant.*;
 
 @RequiredArgsConstructor
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
@@ -21,11 +21,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String accessToken = request.getHeader(HEADER_ACCESS_TOKEN);
+        if (request.getHeader(HEADER_AUTHORIZATION) != null) {
+            String jwtHeader = request.getHeader(HEADER_AUTHORIZATION);
 
-        if (accessToken != null && jwtTokenProvider.verifyToken(accessToken)) {
-            Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (jwtHeader != null || jwtHeader.startsWith(HEADER_ACCESS_TOKEN_PREFIX)) {
+                String accessToken = jwtHeader.replace(HEADER_ACCESS_TOKEN_PREFIX, "");
+
+                Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
 
         filterChain.doFilter(request, response);

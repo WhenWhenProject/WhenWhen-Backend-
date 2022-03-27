@@ -34,6 +34,25 @@ API 에 관계없이 아래 사항을 지켜주셔야 합니다.
 | `ec2-13-125-111-105.ap-northeast-2.compute.amazonaws.com:8080`
 |===
 
+== 테스트 API
+
+[[api-test-hello]]
+=== [ hello 테스트 ]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-test-hello/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-test-hello/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-test-hello/http-response.adoc[]
+
+&#160;
+
 == 유저 API
 
 [[api-auth-sign-up]]
@@ -57,24 +76,6 @@ include::{snippets}/api-auth-sign-up/http-response.adoc[]
 
 &#160;
 
-[[api-oauth2-login]]
-=== [ Oauth2 로그인 ]
-
-|===
-| Provider | URI
-
-| google
-| /oauth2/authorization/google
-
-| kakao
-| /oauth2/authorization/kakao
-
-| naver
-| /oauth2/authorization/naver
-|===
-
-&#160;
-
 [[api-auth-login]]
 === [ 서버 로그인 ]
 
@@ -87,8 +88,6 @@ include::{snippets}/api-auth-login/request-fields.adoc[]
 include::{snippets}/api-auth-login/http-request.adoc[]
 
 ==== - RESPONSE -
-
-include::{snippets}/api-auth-login/response-headers.adoc[]
 
 include::{snippets}/api-auth-login/response-fields.adoc[]
 
@@ -110,8 +109,6 @@ include::{snippets}/api-auth-refresh/request-headers.adoc[]
 include::{snippets}/api-auth-refresh/http-request.adoc[]
 
 ==== - RESPONSE -
-
-include::{snippets}/api-auth-refresh/response-headers.adoc[]
 
 include::{snippets}/api-auth-refresh/response-fields.adoc[]
 
@@ -209,26 +206,45 @@ include::{snippets}/api-plan-findAllParticipatedIn/http-response.adoc[]
 
 &#160;
 
-[[api-plan-create]]
-=== [ 일정 생성하기 ]
+[[api-plan-findAllFixed]]
+=== [ 참여한 일정 중 확정된 일정 불러오기 ]
 
 ==== - REQUEST -
 
-include::{snippets}/api-plan-create/request-headers.adoc[]
-
-include::{snippets}/api-plan-create/request-fields.adoc[]
+include::{snippets}/api-plan-findAllFixed/request-headers.adoc[]
 
 ===== Request HTTP 예시
 
-include::{snippets}/api-plan-create/http-request.adoc[]
+include::{snippets}/api-plan-findAllFixed/http-request.adoc[]
 
 ==== - RESPONSE -
 
-include::{snippets}/api-plan-create/response-fields.adoc[]
+include::{snippets}/api-plan-findAllFixed/response-fields.adoc[]
 
 ===== Response HTTP 예시
 
-include::{snippets}/api-plan-create/http-response.adoc[]
+include::{snippets}/api-plan-findAllFixed/http-response.adoc[]
+
+&#160;
+
+[[api-plan-findAllUnfixed]]
+=== [ 참여한 일정 중 확정되지 않은 일정 불러오기 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-plan-findAllUnfixed/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-plan-findAllUnfixed/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-plan-findAllUnfixed/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-plan-findAllUnfixed/http-response.adoc[]
 
 &#160;
 
@@ -289,7 +305,7 @@ include::{snippets}/api-join-enroll/path-parameters.adoc[]
 
 include::{snippets}/api-join-enroll/request-headers.adoc[]
 
-include::{snippets}/api-join-enroll/request-fields-list.adoc[]
+include::{snippets}/api-join-enroll/request-fields.adoc[]
 
 ===== Request HTTP 예시
 
@@ -305,3 +321,50 @@ include::{snippets}/api-join-enroll/http-response.adoc[]
 
 &#160;
 
+[[api-join-update]]
+=== [ 일정 참여 정보 변경 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-join-update/path-parameters.adoc[]
+
+include::{snippets}/api-join-update/request-headers.adoc[]
+
+include::{snippets}/api-join-update/request-fields.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-join-update/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-join-update/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-join-update/http-response.adoc[]
+
+&#160;
+
+[[api-join-delete]]
+=== [ 일정 참여 정보 삭제 ]
+
+==== - REQUEST -
+
+include::{snippets}/api-join-delete/path-parameters.adoc[]
+
+include::{snippets}/api-join-delete/request-headers.adoc[]
+
+===== Request HTTP 예시
+
+include::{snippets}/api-join-delete/http-request.adoc[]
+
+==== - RESPONSE -
+
+include::{snippets}/api-join-delete/response-fields.adoc[]
+
+===== Response HTTP 예시
+
+include::{snippets}/api-join-delete/http-response.adoc[]
+
+&#160;

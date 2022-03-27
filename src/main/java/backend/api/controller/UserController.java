@@ -21,14 +21,14 @@ public class UserController {
     public ApiResponse<UserResponse> find(@CurrentUser UserPrincipal userPrincipal) {
         UserDto userDto = userService.findByUsername(userPrincipal.getUsername());
 
-        return ApiResponse.success("user", UserResponse.of(userDto));
+        return new ApiResponse<>(UserResponse.of(userDto));
     }
 
     @PatchMapping("/my-info")
-    public ApiResponse<UserResponse> update(@CurrentUser UserPrincipal userPrincipal, @RequestBody ChangeUserRequest changeUserRequest) {
-        UserDto userDto = userService.changeUserInfo(userPrincipal.getUsername(), changeUserRequest);
+    public ApiResponse<String> update(@CurrentUser UserPrincipal userPrincipal, @RequestBody ChangeUserRequest changeUserRequest) {
+        userService.changeUserInfo(userPrincipal.getUsername(), changeUserRequest);
 
-        return ApiResponse.success("user", UserResponse.of(userDto));
+        return new ApiResponse<>("success");
     }
 
 }

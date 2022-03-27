@@ -1,7 +1,7 @@
 package backend.api.controller;
 
 import backend.api.controller.dto.common.ApiResponse;
-import backend.api.controller.dto.request.JoinEnrollRequest;
+import backend.api.controller.dto.request.JoinInfoRequest;
 import backend.api.controller.dto.response.JoinInfoResponse;
 import backend.api.service.JoinService;
 import backend.api.service.dto.JoinInfoDto;
@@ -28,21 +28,28 @@ public class JoinController {
                 .map(joinInfoDto -> JoinInfoResponse.of(joinInfoDto))
                 .collect(Collectors.toList());
 
-        return ApiResponse.success("list", result);
+        return new ApiResponse<>(result);
     }
 
     @PostMapping("/{planId}")
-    public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody JoinEnrollRequest joinEnrollRequest) {
-        joinService.enroll(userPrincipal.getUsername(), planId, joinEnrollRequest.getJoinInfoRequestList());
-        return ApiResponse.success("create", "success");
+    public ApiResponse<String> enroll(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody List<JoinInfoRequest> list) {
+        joinService.enroll(userPrincipal.getUsername(), planId, list);
+
+        return new ApiResponse<>("success");
     }
 
-//    @DsssseleteMapping("/{planId}")
-//    public ApiResponse<String> delete(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId) {
-//        joinService.delete(userPrincipal.getUsername(), planId);
-//
-//        return ApiResponse.success("delete", "success");
-//    }
+    @PatchMapping("/{planId}")
+    public ApiResponse<String> update(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId, @RequestBody List<JoinInfoRequest> list) {
+        joinService.update(userPrincipal.getUsername(), planId, list);
 
+        return new ApiResponse<>("success");
+    }
+
+    @DeleteMapping("/{planId}")
+    public ApiResponse<String> delete(@CurrentUser UserPrincipal userPrincipal, @PathVariable("planId") Long planId) {
+        joinService.delete(userPrincipal.getUsername(), planId);
+
+        return new ApiResponse<>("success");
+    }
 
 }

@@ -10,7 +10,8 @@ spring:
     open-in-view: false
 
   profiles:
-    include: aws
+    include: local
+#    include: dev
 
 logging:
   level:

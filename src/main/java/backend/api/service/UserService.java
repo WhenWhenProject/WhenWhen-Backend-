@@ -3,6 +3,7 @@ package backend.api.service;
 import backend.api.controller.dto.request.ChangeUserRequest;
 import backend.api.controller.dto.request.LoginRequest;
 import backend.api.controller.dto.request.SignUpRequest;
+import backend.api.controller.dto.request.TokenRefreshRequest;
 import backend.api.entity.User;
 import backend.api.exception.PasswordMisMatchException;
 import backend.api.exception.UserNotFoundException;
@@ -18,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import static backend.util.HeaderConstant.HEADER_ACCESS_TOKEN;
 import static backend.util.HeaderConstant.HEADER_REFRESH_TOKEN;
 
 @Service
@@ -50,7 +49,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void login(HttpServletResponse response, LoginRequest loginRequest) {
+    public JwtToken login(LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
@@ -61,12 +60,11 @@ public class UserService {
 
         JwtToken jwtToken = jwtTokenProvider.createJwtToken(username, user.getRoleType().getCode());
 
-        response.addHeader(HEADER_ACCESS_TOKEN, jwtToken.getAccessToken());
-        response.addHeader(HEADER_REFRESH_TOKEN, jwtToken.getRefreshToken());
+        return jwtToken;
     }
 
-    public void refresh(HttpServletRequest request, HttpServletResponse response) {
-        String refreshToken = request.getHeader(HEADER_REFRESH_TOKEN);
+    public JwtToken refresh(TokenRefreshRequest tokenRefreshRequest) {
+        String refreshToken = tokenRefreshRequest.getRefreshToken();
 
         if (refreshToken != null && jwtTokenProvider.verifyToken(refreshToken)) {
             String username = jwtTokenProvider.getUsername(refreshToken);
@@ -76,8 +74,7 @@ public class UserService {
 
             JwtToken jwtToken = jwtTokenProvider.createJwtToken(username, user.getRoleType().getCode());
 
-            response.addHeader(HEADER_ACCESS_TOKEN, jwtToken.getAccessToken());
-            response.addHeader(HEADER_REFRESH_TOKEN, jwtToken.getRefreshToken());
+            return jwtToken;
         }
 
         throw new TokenValidFailedException();
@@ -91,12 +88,10 @@ public class UserService {
     }
 
     @Transactional
-    public UserDto changeUserInfo(String username, ChangeUserRequest changeUserRequest) {
+    public void changeUserInfo(String username, ChangeUserRequest changeUserRequest) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(UserNotFoundException::new);
         changeUserRequest.apply(user);
-
-        return UserDto.of(user);
     }
 
 }
