@@ -4,6 +4,7 @@ import backend.oauth.entity.RoleType;
 import backend.oauth.entity.UserPrincipal;
 import backend.token.JwtToken;
 import backend.token.JwtTokenProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
-
-import static backend.util.HeaderConstant.HEADER_ACCESS_TOKEN;
-import static backend.util.HeaderConstant.HEADER_REFRESH_TOKEN;
 
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -33,10 +31,9 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
         JwtToken jwtToken = jwtTokenProvider.createJwtToken(username, roleType.getCode());
 
-
-        response.addHeader(HEADER_ACCESS_TOKEN, jwtToken.getAccessToken());
-        response.addHeader(HEADER_REFRESH_TOKEN, jwtToken.getRefreshToken());
+        ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(jwtToken));
     }
 
     private boolean hasAuthority(Collection<? extends GrantedAuthority> authorities, String authority) {

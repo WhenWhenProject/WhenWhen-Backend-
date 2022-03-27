@@ -2,6 +2,7 @@ package backend.restdocs;
 
 import backend.api.controller.dto.request.LoginRequest;
 import backend.api.controller.dto.request.SignUpRequest;
+import backend.api.controller.dto.request.TokenRefreshRequest;
 import backend.oauth.entity.RoleType;
 import backend.restdocs.utils.ApiDocumentationTest;
 import backend.token.JwtToken;
@@ -12,13 +13,15 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static backend.restdocs.utils.ApiDocumentUtils.getDocumentRequest;
 import static backend.restdocs.utils.ApiDocumentUtils.getDocumentResponse;
-import static backend.util.HeaderConstant.HEADER_ACCESS_TOKEN;
-import static backend.util.HeaderConstant.HEADER_REFRESH_TOKEN;
+import static backend.util.HeaderConstant.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AuthDocumentationTest extends ApiDocumentationTest {
@@ -57,11 +60,10 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일 주소").optional()
                         ),
                         responseFields(
-                                fieldWithPath("header.code").type(JsonFieldType.NUMBER).description("응답 코드"),
-                                fieldWithPath("header.message").type(JsonFieldType.STRING).description("응답 메시지"),
-                                fieldWithPath("body.signUp").type(JsonFieldType.STRING).description("회원가입 성공 여부")
+                                fieldWithPath("data").type(JsonFieldType.STRING).description("가입 성공 여부")
                         )
                 ))
+
                 .andExpect(status().isOk());
     }
 
@@ -75,6 +77,10 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
         request.setUsername(username);
         request.setPassword(password);
 
+        JwtToken jwtToken = tokenProvider.createJwtToken(username, RoleType.USER.getCode());
+        given(userService.login(any()))
+                .willReturn(jwtToken);
+
         // when
         ResultActions result = mockMvc.perform(
                 post("/api/auth/login")
@@ -82,11 +88,6 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
-
-        JwtToken jwtToken = tokenProvider.createJwtToken(username, RoleType.USER.getCode());
-
-        result.andReturn().getResponse().addHeader(HEADER_ACCESS_TOKEN, jwtToken.getAccessToken());
-        result.andReturn().getResponse().addHeader(HEADER_REFRESH_TOKEN, jwtToken.getRefreshToken());
 
         // then
         result
@@ -97,14 +98,9 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
                                 fieldWithPath("username").type(JsonFieldType.STRING).description("계정 ID"),
                                 fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
                         ),
-                        responseHeaders(
-                                headerWithName(HEADER_ACCESS_TOKEN).description("엑세스 토큰"),
-                                headerWithName(HEADER_REFRESH_TOKEN).description("리프레시 토큰")
-                        ),
                         responseFields(
-                                fieldWithPath("header.code").type(JsonFieldType.NUMBER).description("응답 코드"),
-                                fieldWithPath("header.message").type(JsonFieldType.STRING).description("응답 메시지"),
-                                fieldWithPath("body.login").type(JsonFieldType.STRING).description("로그인 성공 여부")
+                                fieldWithPath("data.accessToken").type(JsonFieldType.STRING).description("엑세스 토큰"),
+                                fieldWithPath("data.refreshToken").type(JsonFieldType.STRING).description("리프레시 토큰")
                         )
                 ))
                 .andExpect(status().isOk());
@@ -116,19 +112,21 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
         String username = "abc123";
 
         JwtToken originJwtToken = tokenProvider.createJwtToken(username, RoleType.USER.getCode());
+        TokenRefreshRequest request = new TokenRefreshRequest();
+        request.setRefreshToken(originJwtToken.getRefreshToken());
 
         JwtToken newJwtToken = tokenProvider.createJwtToken(username, RoleType.USER.getCode());
+        given(userService.refresh(any()))
+                .willReturn(newJwtToken);
 
         // when
         ResultActions result = mockMvc.perform(
                 get("/api/auth/refresh")
-                        .header(HEADER_ACCESS_TOKEN, originJwtToken.getAccessToken())
-                        .header(HEADER_REFRESH_TOKEN, originJwtToken.getRefreshToken())
+                        .header(HEADER_AUTHORIZATION, HEADER_ACCESS_TOKEN_PREFIX + originJwtToken.getAccessToken())
+                        .content(objectMapper.writeValueAsString(request))
+                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
         );
-
-        result.andReturn().getResponse().addHeader(HEADER_ACCESS_TOKEN, newJwtToken.getAccessToken());
-        result.andReturn().getResponse().addHeader(HEADER_REFRESH_TOKEN, newJwtToken.getRefreshToken());
 
         // then
         result
@@ -136,17 +134,14 @@ public class AuthDocumentationTest extends ApiDocumentationTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestHeaders(
-                                headerWithName(HEADER_ACCESS_TOKEN).description("기존 엑세스 토큰"),
-                                headerWithName(HEADER_REFRESH_TOKEN).description("기존 리프레시 토큰")
+                                headerWithName(HEADER_AUTHORIZATION).description("엑세스 토큰")
                         ),
-                        responseHeaders(
-                                headerWithName(HEADER_ACCESS_TOKEN).description("새로운 엑세스 토큰"),
-                                headerWithName(HEADER_REFRESH_TOKEN).description("새로운 리프레시 토큰")
+                        requestFields(
+                                fieldWithPath("refreshToken").type(JsonFieldType.STRING).description("리프레시 토큰")
                         ),
                         responseFields(
-                                fieldWithPath("header.code").type(JsonFieldType.NUMBER).description("응답 코드"),
-                                fieldWithPath("header.message").type(JsonFieldType.STRING).description("응답 메시지"),
-                                fieldWithPath("body.refresh").type(JsonFieldType.STRING).description("갱신 성공 여부")
+                                fieldWithPath("data.accessToken").type(JsonFieldType.STRING).description("엑세스 토큰"),
+                                fieldWithPath("data.refreshToken").type(JsonFieldType.STRING).description("리프레시 토큰")
                         )
                 ))
                 .andExpect(status().isOk());

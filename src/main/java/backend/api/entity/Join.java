@@ -23,7 +23,7 @@ public class Join {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @OneToMany(mappedBy = "join", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "join", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JoinInfo> joinInfoList = new ArrayList<>();
 
     public Long getId() {

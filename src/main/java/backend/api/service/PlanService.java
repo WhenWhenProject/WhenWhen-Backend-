@@ -70,6 +70,22 @@ public class PlanService {
                 .collect(Collectors.toList());
     }
 
+    public List<PlanDto> findAllFixed(String username) {
+        List<Plan> planList = planRepository.findAllFixedByUsername(username);
+
+        return planList.stream()
+                .map(plan -> PlanDto.of(plan))
+                .collect(Collectors.toList());
+    }
+
+    public List<PlanDto> findAllUnfixed(String username) {
+        List<Plan> planList = planRepository.findAllUnfixedByUsername(username);
+
+        return planList.stream()
+                .map(plan -> PlanDto.of(plan))
+                .collect(Collectors.toList());
+    }
+
 }
 
 

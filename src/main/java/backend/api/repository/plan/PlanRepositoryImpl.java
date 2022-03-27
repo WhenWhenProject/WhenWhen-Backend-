@@ -51,4 +51,30 @@ public class PlanRepositoryImpl extends MyQuerydslRepositorySupport implements P
                 .fetch();
     }
 
+    @Override
+    public List<Plan> findAllFixedByUsername(String username) {
+        return getQueryFactory()
+                .select(plan)
+                .from(join)
+                .join(join.plan, plan).fetchJoin()
+                .join(join.user, user).fetchJoin()
+                .where(plan.fixed.eq(true).and(
+                        user.username.eq(username)
+                ))
+                .fetch();
+    }
+
+    @Override
+    public List<Plan> findAllUnfixedByUsername(String username) {
+        return getQueryFactory()
+                .select(plan)
+                .from(join)
+                .join(join.plan, plan).fetchJoin()
+                .join(join.user, user).fetchJoin()
+                .where(plan.fixed.eq(false).and(
+                        user.username.eq(username)
+                ))
+                .fetch();
+    }
+
 }
